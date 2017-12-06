@@ -1,10 +1,19 @@
-const svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+const width = innerWidth;
+const height = innerHeight;
+const NODE_RADIUS = 10;
+const LINE_WEIGHT_FACTOR = 1;
+const DISTANCE_FACTOR = 30;
+const TEXT_OFFSET = NODE_RADIUS * 1.25 ;
+
+const svg = d3.select("svg");
+svg.attr("width", width);
+svg.attr("height", height);
+    // width = +svg.attr("width"),
+    // height = +svg.attr("height");
 const color = d3.scaleOrdinal(d3.schemeCategory20);
 
 const simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id;}))
+        .force("link", d3.forceLink().id(function(d) { return d.id;}).distance(d => {return d.value * DISTANCE_FACTOR}))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
 d3.json("test.json", function (error, graph) {
@@ -15,15 +24,18 @@ d3.json("test.json", function (error, graph) {
         .data(graph.links)
         .enter().append("line")
         .attr("stroke-width", function (d) {
-            return Math.sqrt(d.value);
+            return Math.sqrt(d.value)*LINE_WEIGHT_FACTOR;
         });
 
     const node = svg.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
         .data(graph.nodes)
-        .enter().append("circle")
-        .attr("r", 5)
+        .enter()
+        .append("g").attr("class", "node");
+    node
+        .append("circle")
+        .attr("r", NODE_RADIUS)
         .attr("fill", function (d) {
             return color(d.group);
         })
@@ -32,9 +44,11 @@ d3.json("test.json", function (error, graph) {
             .on("drag", dragged)
             .on("end", dragended));
 
-    node.append("title")
-    .text(function (d) {
-        return d.id;
+    node.append("text")
+        .attr("dx", TEXT_OFFSET)
+        .attr("dy", 0)
+        .text(function (d) {
+            return d.id;
     });
 
 simulation
@@ -42,7 +56,7 @@ simulation
     .on("tick", ticked);
 
 simulation.force("link")
-    .links(graph.links);
+    .links(graph.links);//.distance(link => {return link.value * DISTANCE_FACTOR});
 
 function ticked() {
     link
@@ -60,6 +74,7 @@ function ticked() {
         });
 
     node
+        .attr("transform", d => `translate(${d.x}, ${d.y})`)
         .attr("cx", function (d) {
             return d.x;
         })
