@@ -1,21 +1,31 @@
 $.getJSON('sampledata.json', function(data) {
-	// console.log(data);
-	var nodes;
 	var output = '<ul>';
+	var jsonObject = new Object();
+	var nodesMap = [];
+	var links = Array();
+
 	$.each(data, function(key, val){
 		output += '<li>' + val.sub_a + " " + val.sub_b+ '</li>';
-		nodes = {"subreddit"  : val.sub_a, "weight" : val.sub_ac};
+		nodesMap[val.sub_a] = val.sub_ac;
+		links.push({"source":val.sub_a, "target":val.sub_b, "value":val.percent})
 	});
-	console.log(nodes);
 	output += '</ul>';
+	var nodes = dictToArray(nodesMap);
+	jsonObject.nodes = nodes;
+	jsonObject.links = links;
+	var newJson = JSON.stringify(jsonObject);
+	console.log(newJson);
 	$("#update").html(output);
 });
 
+function dictToArray(nodesMap) {
+	var output = [], item;
+	for (var subreddit in nodesMap) {
+		item = {};
+		item.subreddit = subreddit;
+		item.group = nodesMap[subreddit];
+		output.push(item);
+	}
+	return output;
 
- // var graph = { "nodes" : [ 
- //            { "subreddit"  : "default", "weight" : val.sub_ac},
- //            ], 		
- //            "links"  : [
- //               { "from"  : val.sub_a, "to" : val.sub_b, "weight" : val.percent }, 
- //               ]    
- //         }    
+}
