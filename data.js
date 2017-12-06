@@ -27,7 +27,7 @@ function dictToArray(nodesMap) {
 	var output = [], item;
 	for (var subreddit in nodesMap) {
 		item = {};
-		item.subreddit = subreddit;
+		item.id = subreddit;
 		item.group = nodesMap[subreddit];
 		output.push(item);
 	}

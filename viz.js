@@ -1,8 +1,8 @@
 const width = innerWidth;
 const height = innerHeight;
 const NODE_RADIUS = 10;
-const LINE_WEIGHT_FACTOR = 1;
-const DISTANCE_FACTOR = 30;
+const LINE_WEIGHT_FACTOR = 0.25;
+const DISTANCE_FACTOR = 7;
 const TEXT_OFFSET = NODE_RADIUS * 1.25 ;
 
 const svg = d3.select("svg");
