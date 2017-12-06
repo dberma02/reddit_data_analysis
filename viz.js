@@ -16,8 +16,9 @@ const simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function(d) { return d.id;}).distance(d => {return d.value * DISTANCE_FACTOR}))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
-d3.json("test.json", function (error, graph) {
+d3.json("sampledata.json", function (error, data) {
     if(error) throw error;
+    const graph = toGraph(data);
     const link = svg.append("g")
         .attr("class", "links")
         .selectAll("line")
