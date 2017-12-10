@@ -1,4 +1,5 @@
 const createForceGraph = function (result) {
+    return null;
     const width = innerWidth;
     const height = innerHeight;
     const NODE_RADIUS = 10;
