@@ -13,14 +13,23 @@
 
     <body>
         <h1>Reddit Data Anal</h1>
-        <h2>Lets get litty</h2>
-        <svg width="500" height="500"></svg>
+        <p class="subtitle">Lets get litty</p>
+        <h2>Subreddit Connections</h2>
+        <svg width="500" height="500" id="force-graph"></svg>
+        <h2>Commenter Relationships</h2>
+        <svg width="1200" height="800" id="sankey-diagram"></svg>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
-
+        <script src="https://unpkg.com/d3-array@1"></script>
+        <script src="https://unpkg.com/d3-collection@1"></script>
+        <script src="https://unpkg.com/d3-path@1"></script>
+        <script src="https://unpkg.com/d3-shape@1"></script>
+        <script src="https://unpkg.com/d3-sankey@0"></script>
     <script src="data.js"></script>
     <script src="query.js"></script>
+    <script src="sankey.js"></script>
     <script src="viz.js"></script>
+
         <div id="update"> </div>
     </body>
 </html>

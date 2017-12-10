@@ -5,11 +5,11 @@ const LINE_WEIGHT_FACTOR = 0.25;
 const DISTANCE_FACTOR = 7;
 const TEXT_OFFSET = NODE_RADIUS * 1.25 ;
 
-const svg = d3.select("svg");
-svg.attr("width", width);
-svg.attr("height", height);
-    // width = +svg.attr("width"),
-    // height = +svg.attr("height");
+const svg_force_graph = d3.select("#force-graph");
+svg_force_graph.attr("width", width);
+svg_force_graph.attr("height", height);
+    // width = +svg_force_graph.attr("width"),
+    // height = +svg_force_graph.attr("height");
 const color = d3.scaleOrdinal(d3.schemeCategory20);
 
 const simulation = d3.forceSimulation()
@@ -19,7 +19,7 @@ const simulation = d3.forceSimulation()
 d3.json("sampledata.json", function (error, data) {
     if(error) throw error;
     const graph = toGraph(data);
-    const link = svg.append("g")
+    const link = svg_force_graph.append("g")
         .attr("class", "links")
         .selectAll("line")
         .data(graph.links)
@@ -28,13 +28,13 @@ d3.json("sampledata.json", function (error, data) {
             return Math.sqrt(d.value)*LINE_WEIGHT_FACTOR;
         });
 
-    const node = svg.append("g")
+    const node = svg_force_graph.append("g")
         .attr("class", "nodes")
         .selectAll("circle")
         .data(graph.nodes)
         .enter()
         .append("g").attr("class", "node");
-    node
+    const circle = node
         .append("circle")
         .attr("r", NODE_RADIUS)
         .attr("fill", function (d) {
@@ -45,7 +45,7 @@ d3.json("sampledata.json", function (error, data) {
             .on("drag", dragged)
             .on("end", dragended));
 
-    node.append("text")
+    const label = node.append("text")
         .attr("dx", TEXT_OFFSET)
         .attr("dy", 0)
         .text(function (d) {
@@ -75,13 +75,13 @@ function ticked() {
         });
 
     node
-        .attr("transform", d => `translate(${d.x}, ${d.y})`)
-        .attr("cx", function (d) {
+        .attr("transform", d => `translate(${d.x}, ${d.y})`);
+        /*.attr("cx", function (d) {
             return d.x;
         })
         .attr("cy", function (d) {
             return d.y;
-        });
+        });*/
 }
 });
 
@@ -102,4 +102,4 @@ function dragended(d) {
     d.fy = null;
 }
 
-
+createSankeyDiagram();

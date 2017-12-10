@@ -1,4 +1,4 @@
-function toGraph(data) {
+ function toGraph(data) {
     var output = '<ul>';
     var jsonObject = new Object();
     var nodesMap = [];
@@ -16,12 +16,9 @@ function toGraph(data) {
     // var newJson = JSON.stringify(jsonObject);
     console.log(jsonObject);
     return jsonObject;
-    $("#update").html(output);
 }
 
-$.getJSON('sampledata.json', function(data) {
-    // toGraph(data);
-});
+
 
 function dictToArray(nodesMap) {
 	var output = [], item;
