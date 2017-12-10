@@ -15,9 +15,10 @@
       'timeoutMs': '300000',
       'query': full_query,
     });
-    request.execute(function(response) {     
+    request.execute(function(response) {
         console.log(response);
         data = response.result;
+        createForceGraph(response.result);
     });
     return data;
   }
