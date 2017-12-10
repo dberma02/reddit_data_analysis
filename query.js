@@ -17,8 +17,7 @@
     });
     request.execute(function(response) {
         console.log(response);
-        data = response.result;
-        createForceGraph(response.result);
+        createForceGraph(response.rows);
     });
     return data;
   }

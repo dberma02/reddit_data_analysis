@@ -19,6 +19,7 @@ const createForceGraph = function (result) {
         .force("center", d3.forceCenter(width / 2, height / 2));
 
     const graph = toGraph(result);
+    
     const link = svg_force_graph.append("g")
         .attr("class", "links")
         .selectAll("line")
