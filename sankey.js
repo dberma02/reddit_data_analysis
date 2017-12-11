@@ -10,7 +10,7 @@ const formatNumber = d3.format(",.0f"),
 
 const sankey = d3.sankey()
     .nodeWidth(15)
-    .nodePadding(50)
+    .nodePadding(10)
     .extent([[1, 1], [width - 1, height - 6]]);
     const defs = svg.append('defs');
 let link = svg.append("g")

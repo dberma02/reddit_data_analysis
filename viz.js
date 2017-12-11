@@ -1,7 +1,6 @@
 const createForceGraph = function (result) {
-    return null;
-    const width = innerWidth;
-    const height = innerHeight;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
     const NODE_RADIUS = 10;
     const LINE_WEIGHT_FACTOR = 0.25;
     const DISTANCE_FACTOR = 7;
@@ -13,14 +12,15 @@ const createForceGraph = function (result) {
     // width = +svg_force_graph.attr("width"),
     // height = +svg_force_graph.attr("height");
     const color = d3.scaleOrdinal(d3.schemeCategory20);
-
+    const graph = toGraph(result);
     const simulation = d3.forceSimulation()
-        .force("link", d3.forceLink().id(function(d) { return d.id;}).distance(d => {return d.value * DISTANCE_FACTOR}))
+        .force("link", d3.forceLink().id(function(d) { return d.id;}).distance(function (d) {
+            return d.value * DISTANCE_FACTOR
+        }))
         .force("charge", d3.forceManyBody())
         .force("center", d3.forceCenter(width / 2, height / 2));
 
-    const graph = toGraph(result);
-    
+
     const link = svg_force_graph.append("g")
         .attr("class", "links")
         .selectAll("line")
@@ -57,10 +57,11 @@ const createForceGraph = function (result) {
     simulation
         .nodes(graph.nodes)
         .on("tick", ticked);
-
+    console.log("nodes", graph.nodes);
     simulation.force("link")
-        .links(graph.links);//.distance(link => {return link.value * DISTANCE_FACTOR});
+        .links(graph.links);
 
+    return null;
     function ticked() {
         link
             .attr("x1", function (d) {
@@ -77,7 +78,9 @@ const createForceGraph = function (result) {
             });
 
         node
-            .attr("transform", d => `translate(${d.x}, ${d.y})`);
+            .attr("transform", function (d) {
+                return `translate(${d.x}, ${d.y})`;
+            });
         /*.attr("cx", function (d) {
             return d.x;
         })
