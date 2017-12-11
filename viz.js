@@ -1,10 +1,21 @@
+var graph_simulation;
+var dist_factor;
+var dist_exp;
+var charge_str;
 const createForceGraph = function (result) {
     const width = window.innerWidth;
     const height = window.innerHeight;
     const NODE_RADIUS = 10;
-    const LINE_WEIGHT_FACTOR = 0.25;
-    const DISTANCE_FACTOR = 7;
+    const LINE_WEIGHT_FACTOR = 0.05;
+    const DISTANCE_FACTOR = 5260;
+    const DISTANCE_EXP = 1.8;
     const TEXT_OFFSET = NODE_RADIUS * 1.25 ;
+    const CHARGE_STRENGTH = -300;
+    const LINE_WEIGHT_EXP = 0.90;
+
+    dist_factor = DISTANCE_FACTOR;
+    dist_exp = DISTANCE_EXP;
+    charge_str = CHARGE_STRENGTH;
 
     const svg_force_graph = d3.select("#force-graph");
     svg_force_graph.attr("width", width);
@@ -15,9 +26,9 @@ const createForceGraph = function (result) {
     const graph = toGraph(result);
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function(d) { return d.id;}).distance(function (d) {
-            return d.value * DISTANCE_FACTOR
+            return  (1/Math.pow(d.value, DISTANCE_EXP)) * DISTANCE_FACTOR
         }))
-        .force("charge", d3.forceManyBody())
+        .force("charge", d3.forceManyBody().strength(CHARGE_STRENGTH))
         .force("center", d3.forceCenter(width / 2, height / 2));
 
 
@@ -27,7 +38,7 @@ const createForceGraph = function (result) {
         .data(graph.links)
         .enter().append("line")
         .attr("stroke-width", function (d) {
-            return Math.sqrt(d.value)*LINE_WEIGHT_FACTOR;
+            return Math.pow(d.value , LINE_WEIGHT_EXP)*LINE_WEIGHT_FACTOR;
         });
 
     const node = svg_force_graph.append("g")
@@ -61,7 +72,6 @@ const createForceGraph = function (result) {
     simulation.force("link")
         .links(graph.links);
 
-    return null;
     function ticked() {
         link
             .attr("x1", function (d) {
@@ -106,7 +116,53 @@ const createForceGraph = function (result) {
         d.fx = null;
         d.fy = null;
     }
+    console.log(simulation);
+    return simulation;
 };
+$.getJSON("response.json", (result) => {
+    graph_simulation = createForceGraph(result.rows);
+    console.log(graph_simulation);
+});
 
+function setCharge(simulation, CHARGE_STRENGTH) {
+charge_str = CHARGE_STRENGTH;
+console.log("charge strength", charge_str);
+simulation.force("charge").strength(CHARGE_STRENGTH);
+    simulation.restart();
+    simulation.alpha(1);
+}
+function setDistance(simulation, DISTANCE_FACTOR, DISTANCE_EXP) {
+    dist_exp = DISTANCE_EXP;
+    dist_factor = DISTANCE_FACTOR;
+simulation.force("link").distance(function (d) {
+        return  (1/Math.pow(d.value, DISTANCE_EXP)) * DISTANCE_FACTOR
+    });
+    simulation.restart();
+    simulation.alpha(1);
 
+}
+
+$(document).keypress(function(e) {
+    console.log("key", e.which);
+    switch(e.which) {
+        case 119:
+            setCharge(graph_simulation, charge_str*1.1);
+            break;
+        case 115:
+            setCharge(graph_simulation, charge_str*.9);
+            break;
+        case 106:
+            setDistance(graph_simulation, dist_factor, dist_exp*1.009);
+            break;
+        case 105:
+            setDistance(graph_simulation, dist_factor, dist_exp*0.991);
+            break;
+        case 111:
+            setDistance(graph_simulation, dist_factor * 1.10, dist_exp);
+            break;
+        case 107:
+            setDistance(graph_simulation, dist_factor * .90, dist_exp);
+            break;
+    }
+});
 createSankeyDiagram();
