@@ -68,7 +68,7 @@ const createForceGraph = function (result) {
     simulation
         .nodes(graph.nodes)
         .on("tick", ticked);
-    console.log("nodes", graph.nodes);
+    // console.log("nodes", graph.nodes);
     simulation.force("link")
         .links(graph.links);
 
