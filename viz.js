@@ -8,9 +8,9 @@ const createForceGraph = function (result) {
     const NODE_RADIUS = 10;
     const LINE_WEIGHT_FACTOR = 0.05;
     const DISTANCE_FACTOR = 5260;
-    const DISTANCE_EXP = 1.8;
+    const DISTANCE_EXP = 0.9;
     const TEXT_OFFSET = NODE_RADIUS * 1.25 ;
-    const CHARGE_STRENGTH = -300;
+    const CHARGE_STRENGTH = -200;
     const LINE_WEIGHT_EXP = 0.90;
 
     dist_factor = DISTANCE_FACTOR;
@@ -117,12 +117,15 @@ const createForceGraph = function (result) {
         d.fy = null;
     }
     console.log(simulation);
+    graph_simulation = simulation;
     return simulation;
 };
-$.getJSON("response.json", (result) => {
-    graph_simulation = createForceGraph(result.rows);
-    console.log(graph_simulation);
-});
+
+// $.getJSON("results-20171211-234134.json", (result) => {
+//     console.log(result);
+//     graph_simulation = createForceGraph(result.rows);
+//     console.log(graph_simulation);
+// });
 
 function setCharge(simulation, CHARGE_STRENGTH) {
 charge_str = CHARGE_STRENGTH;
