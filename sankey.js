@@ -28,7 +28,9 @@ let node = svg.append("g")
     .attr("font-size", 10)
     .selectAll("g");
 
+    sankey.resolveCollisions = function () {
 
+    };
     sankey(diagram);
     link = link
         .data(diagram.links)
