@@ -36,13 +36,17 @@
                 <li>Has admin intervention stemmed the growth of hate speech</li>
             </ul>
         </ul>
-        <h2>Subreddit Connections</h2>
-        <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
-        <svg width="500" height="500" id="force-graph"></svg>
-        <h2>Commenter Relationships</h2>
-        <p>In this sankey diagram, we took a look at the most prolific commenters who have commented on a controversial subreddit and looked to see what other subreddits they have commented in.</p>
-        <svg width="1200" height="800" id="sankey-diagram"></svg>
+        <div class="graph">
+            <h2>Subreddit Connections</h2>
+            <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
+        </div>
+        <div class="graph">
+            <svg width="500" height="500" id="force-graph"></svg>
+            <h2>Commenter Relationships</h2>
+            <p>In this sankey diagram, we took a look at the most prolific commenters who have commented on a controversial subreddit and looked to see what other subreddits they have commented in.</p>
+            <svg width="1200" height="800" id="sankey-diagram"></svg>
 
+        </div>
     <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="d3-sankey.js"></script>
         <!--<script src="https://unpkg.com/d3-array@1"></script>-->
