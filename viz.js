@@ -121,11 +121,6 @@ const createForceGraph = function (result) {
     return simulation;
 };
 
-// $.getJSON("results-20171211-234134.json", (result) => {
-//     console.log(result);
-//     graph_simulation = createForceGraph(result.rows);
-//     console.log(graph_simulation);
-// });
 
 function setCharge(simulation, CHARGE_STRENGTH) {
 charge_str = CHARGE_STRENGTH;
@@ -168,4 +163,43 @@ $(document).keypress(function(e) {
             break;
     }
 });
-createSankeyDiagram();
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+function testSankey(numNodes, numLinks, maxValue) {
+    const nodes = new Array(numNodes);
+    const links = new Array(numLinks);
+    const sources = [];
+    const targets = [];
+    console.log(numNodes);
+    for (let i = 0; i < numNodes; i++) {
+        const name = `node${i}`;
+        nodes[i] = {node : i,  name};
+        if(Math.random() >= 0.5) {
+            sources.push(i);
+        } else {
+            targets.push(i);
+        }
+    }
+    for (let i = 0; i < numLinks; i++) {
+        const source = sources[getRandomInt(0, sources.length)];
+        const target = targets[getRandomInt(0, targets.length)];
+        const value = getRandomInt(0, maxValue );
+        links[i] = {source, target, value};
+    }
+    console.log("nodes", nodes);
+    console.log("links", links);
+    createSankeyDiagram({nodes, links});
+}
+
+
+
+// $.getJSON("sankey_test.json", createSankeyDiagram);
+testSankey(20, 20, 100);
+$.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
+
+
