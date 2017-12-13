@@ -66,7 +66,7 @@ function toSankey(data){
      const numLinks = [];
      const links = new Array();
      console.log(data);
-     const MAX_NEIGHBORS = 20;
+     const MAX_NEIGHBORS = 10;
      for(let i = 0; i < data.length; i++) {
 
          const target = data[i].f[1].v;
