@@ -42,15 +42,15 @@ let node = svg.append("g")
         }))
         .attr("stroke-width", function(d) { return Math.max(1, d.width); })
         .style('stroke', (d, i) => {
-        console.log('d from gradient stroke func', d);
+        // console.log('d from gradient stroke func', d);
 
         // make unique gradient ids
         const gradientID = `gradient${i}`;
         const startColor = color(d.source.name.replace(/ .*/, ""));
         const stopColor = color(d.target.name.replace(/ .*/, ""));
 
-        console.log('startColor', startColor);
-        console.log('stopColor', stopColor);
+        // console.log('startColor', startColor);
+        // console.log('stopColor', stopColor);
 
         const linearGradient = defs.append('linearGradient')
             .attr('id', gradientID);
@@ -65,11 +65,11 @@ let node = svg.append("g")
             ])
             .enter().append('stop')
             .attr('offset', d => {
-                console.log('d.offset', d.offset);
+                // console.log('d.offset', d.offset);
                 return d.offset;
             })
             .attr('stop-color', d => {
-                console.log('d.color', d.color);
+                // console.log('d.color', d.color);
                 return d.color;
             });
 

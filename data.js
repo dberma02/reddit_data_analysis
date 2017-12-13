@@ -17,7 +17,8 @@
          }
          if (numLinks[target] < MAX_NEIGHBORS) {
              nodesMap[source] = target;
-             const link = {source: source, target: target, value: data[i].f[2].v};
+             const value = data[i].f[2].v;
+             const link = {source, target, value};
              numLinks[target] += 1;
              numLinks[source] += 1;
              links.push(link);
@@ -65,9 +66,12 @@ function toSankey(data){
      const nodesMap = [];
      const numLinks = [];
      const links = new Array();
+     const targetTotalValue = [];
+     const sourceTotalValue = [];
      console.log(data);
+     const MIN_TARGET_VALUE = 1000;
      const MAX_NEIGHBORS = 10;
-     for(let i = 0; i < 20; i++) { // data.length
+     for(let i = 0; i < data.length; i++) { // data.length
          const target = data[i].f[1].v;
          const source = data[i].f[0].v;
          nodesMap[source] = source;
@@ -77,10 +81,15 @@ function toSankey(data){
          if (!numLinks[source]) {
              numLinks[source] = 0;
          }
-         if (numLinks[target] < MAX_NEIGHBORS) {
+         if (!targetTotalValue[target]) {
+             targetTotalValue[target] = 0;
+         }
+         if (numLinks[source] < MAX_NEIGHBORS) {
              nodesMap[target] = target;
-             const link = {source: source, target: target, value: data[i].f[2].v};
-             numLinks[target] += 1;
+             const value = data[i].f[2].v;
+             const link = {source, target, value};
+             targetTotalValue[target] += value;
+             sourceTotalValue[source] += value;
              numLinks[source] += 1;
              links.push(link);
          }
@@ -91,13 +100,25 @@ function toSankey(data){
         }
     }
      // console.log("links", links);
-     const nodes = dictToSankeyNodes(nodesMap);
-     const fixed_links = links.map(link => ({
+     const nodes = dictToSankeyNodes(nodesMap).filter(node => !targetTotalValue[node.id] || targetTotalValue[node.id] >= MIN_TARGET_VALUE);
+     const fixed_links = links.filter(link => targetTotalValue[link.target] >= MIN_TARGET_VALUE).map(link => ({
          source: nodes.findIndex(node => node.id === link.source),
          target: nodes.findIndex(node => node.id === link.target),
          value: link.value
      }));
-     const graph = {nodes, links: fixed_links};
+     const graph = {
+         nodes: nodes
+             .sort((a, b) => sortByTotalValue(a.id, b.id)),
+         links: fixed_links
+     };
+
+    function sortByTotalValue(a, b) {
+        if (targetTotalValue[a]) {
+            return targetTotalValue[b] - targetTotalValue[a];
+        }
+        return sourceTotalValue[b] - sourceTotalValue[a];
+    }
+
     console.log(graph);
     return graph;
 

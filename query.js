@@ -96,7 +96,7 @@ FROM(
                 AND NOT LOWER(author) CONTAINS "bot"))
           WHERE total_comments > 12000)))
   GROUP BY author, subreddit, comments_in_subreddit, total_comments_in_controversial)))
-WHERE _rank <= 10
+WHERE _rank <= 30
 ORDER BY total_comments_in_controversial DESC, comments_in_subreddit DESC`;
 
   function runForceQuery() {
