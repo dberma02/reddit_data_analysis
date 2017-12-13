@@ -67,8 +67,7 @@ function toSankey(data){
      const links = new Array();
      console.log(data);
      const MAX_NEIGHBORS = 10;
-     for(let i = 0; i < data.length; i++) {
-
+     for(let i = 0; i < 20; i++) { // data.length
          const target = data[i].f[1].v;
          const source = data[i].f[0].v;
          nodesMap[source] = source;
@@ -99,7 +98,7 @@ function toSankey(data){
          value: link.value
      }));
      const graph = {nodes, links: fixed_links};
-    // console.log(graph);
+    console.log(graph);
     return graph;
 
 }

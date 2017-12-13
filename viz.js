@@ -198,8 +198,9 @@ function testSankey(numNodes, numLinks, maxValue) {
 
 
 
-// $.getJSON("sankey_test.json", createSankeyDiagram);
-testSankey(20, 20, 100);
+$.getJSON("sankey_test.json", result => createSankeyDiagram(result.rows));
+// testSankey(20, 20, 100);
 $.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
+
 
 
