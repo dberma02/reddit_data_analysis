@@ -25,7 +25,30 @@ h6 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
   text-transform: uppercase; }
+section {
+  padding: 100px 0; }
+  section h2 {
+    font-size: 3em;
+    margin: 0; }
 
+.header{
+  padding-left:50px;
+  padding-right: 50px;
+}
+.graph_info{
+  padding-left:50px;
+  padding-right: 50px;
+}
+
+section.success {
+  color: white;
+  background: #720017; }
+
+@media (max-width: 767px) {
+  section {
+    padding: 75px 0; }
+  section.first {
+    padding-top: 75px; } }
 
 #mainNav {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
