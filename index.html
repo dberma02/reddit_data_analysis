@@ -16,16 +16,18 @@
 
     <body>
         <h1>Reddit Data Analysis</h1>
+        <h6> WARNING: The following list contains sexist, racist, transphobic, and homophobic slurs. </h3>
+        <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
         <h3> Goals: </h3>
         <ul>
             <li>Examine controversial communities on reddit</li>
             <ul>
-                <li>specifically hate communities</li>
-                <li>See how it has changed over time</li>
+                <li>Specifically look at controversial hate commmunities.</li>
+                <li>See how these groups have changed over time in:</li>
                 <ul>
                     <li>Active contributors</li>
                     <li>Upvotes</li>
-                    <li>Activity on non-controversial subreddits</li>
+                    <li>Influence on non-controversial subreddits</li>
                 </ul>
             </ul>
             <li>Effects of banning on the impact of controversial communities and hate speech</li>
@@ -35,8 +37,10 @@
             </ul>
         </ul>
         <h2>Subreddit Connections</h2>
+        <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
         <svg width="500" height="500" id="force-graph"></svg>
         <h2>Commenter Relationships</h2>
+        <p>In this sankey diagram, we took a look at the most prolific commenters who have commented on a controversial subreddit and looked to see what other subreddits they have commented in.</p>
         <svg width="1200" height="800" id="sankey-diagram"></svg>
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
