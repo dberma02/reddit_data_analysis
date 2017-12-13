@@ -22,6 +22,7 @@
              numLinks[source] += 1;
              links.push(link);
          }
+
     }
     for (let node in nodesMap) {
         if (numLinks[node] > 1) {
@@ -48,6 +49,17 @@ function dictToArray(nodesMap) {
 	}
 	return output;
 }
+ function dictToSankeyNodes(nodesMap) {
+     var output = [], item;
+     // console.log(nodesMap.length);
+     for (var subreddit in nodesMap) {
+         item = {};
+         item.id = subreddit;
+         item.name = nodesMap[subreddit];
+         output.push(item);
+     }
+     return output;
+ }
 
 function toSankey(data){
      const nodesMap = [];
@@ -67,7 +79,7 @@ function toSankey(data){
              numLinks[source] = 0;
          }
          if (numLinks[target] < MAX_NEIGHBORS) {
-             nodesMap[source] = target;
+             nodesMap[target] = target;
              const link = {source: source, target: target, value: data[i].f[2].v};
              numLinks[target] += 1;
              numLinks[source] += 1;
@@ -80,8 +92,13 @@ function toSankey(data){
         }
     }
      // console.log("links", links);
-     const nodes = dictToArray(nodesMap);
-     const graph = {nodes, links};
+     const nodes = dictToSankeyNodes(nodesMap);
+     const fixed_links = links.map(link => ({
+         source: nodes.findIndex(node => node.id === link.source),
+         target: nodes.findIndex(node => node.id === link.target),
+         value: link.value
+     }));
+     const graph = {nodes, links: fixed_links};
     // console.log(graph);
     return graph;
 

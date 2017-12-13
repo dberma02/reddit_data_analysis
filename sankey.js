@@ -1,4 +1,5 @@
-const createSankeyDiagram = function(diagram)  {
+const createSankeyDiagram = function(results)  {
+    const diagram = toSankey(results);
     console.log(diagram);
 const svg = d3.select("#sankey-diagram"),
     width = window.innerWidth,
