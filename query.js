@@ -9,6 +9,7 @@
   percent_of_noncontro_shared,
   a_author_count,
   b_author_count,
+  shared_author_count,
   sub_ac,
   sub_bc,
   _rank
@@ -20,6 +21,7 @@ FROM (
     percent_of_noncontro_shared,
     b_author_count,
     a_author_count,
+    shared_author_count,
     COUNT(*) OVER(PARTITION BY sub_a) sub_ac,
     sub_bc,
     DENSE_RANK() OVER(PARTITION BY sub_B ORDER BY percent_of_contro_shared DESC) _rank
@@ -75,6 +77,7 @@ HAVING
 ORDER BY
   2,
   3 DESC`;
+
 
   function runForceQuery() {
    var request = gapi.client.bigquery.jobs.query({
