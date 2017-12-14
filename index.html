@@ -56,12 +56,15 @@
             </ul>
         </ul>
     </div>
-        <section id="force_graph">
+        <section id="force_graph_window">
             <div class="graph_info">
                 <h2>Subreddit Connections</h2>
                 <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
             </div>
-            <svg width="500" height="500" id="force-graph"></svg>
+            <section id="force_vis">
+                <div id="percentages"></div>
+                <svg width="500" height="500" id="force-graph"></svg>
+            </section>
         </section>
         <section id="sankey_diagram">
             <div class="graph_info">

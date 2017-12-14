@@ -37,7 +37,8 @@ section {
 }
 .graph_info{
   padding-left:50px;
-  padding-right: 50px;
+  padding-right:50px;
+  float:top;
 }
 .warning{
   padding-left: 200px;
@@ -45,6 +46,14 @@ section {
   padding-top: 100px;
   padding-bottom:600px;
 
+}
+.percentages{
+  float:left;
+}
+#force-graph {
+  float:left;
+  border-style:solid;
+  border-color:green;
 }
 section.success {
   color: white;
