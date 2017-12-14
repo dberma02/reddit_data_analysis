@@ -77,6 +77,34 @@ HAVING
 ORDER BY
   2,
   3 DESC`;
+  var sankey_query = `SELECT author, subreddit, comments_in_subreddit,  total_comments_in_controversial, _rank
+FROM(
+SELECT author, subreddit, comments_in_subreddit,  total_comments_in_controversial, 
+       DENSE_RANK() OVER(ORDER BY total_comments_in_controversial DESC) _rank
+FROM(
+  (SELECT author, subreddit, comments_in_subreddit, total_comments total_comments_in_controversial
+   FROM
+     (SELECT author, subreddit, COUNT(*) OVER(PARTITION BY subreddit, author) comments_in_subreddit, 
+              COUNT(*) OVER(PARTITION BY author) total_comments
+           
+       FROM [fh-bigquery:reddit_comments.all]
+        WHERE author in (
+           SELECT author
+           FROM(
+           SELECT author, subreddit, total_comments total_comments_in_controversial
+           FROM(
+              (SELECT author, subreddit, COUNT(*) OVER(PARTITION BY author) total_comments
+           
+                FROM [fh-bigquery:reddit_comments.all]
+                WHERE subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european')
+                AND author NOT IN (SELECT author FROM [fh-bigquery:reddit_comments.bots_201505])
+                AND author != "[deleted]"
+                AND NOT LOWER(author) CONTAINS "bot"))
+          WHERE total_comments > 12000)))
+  GROUP BY author, subreddit, comments_in_subreddit, total_comments_in_controversial)))
+WHERE _rank <= 30
+ORDER BY total_comments_in_controversial DESC, comments_in_subreddit DESC`;
+
 
 
   function runForceQuery() {
