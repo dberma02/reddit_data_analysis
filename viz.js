@@ -24,6 +24,8 @@ const createForceGraph = function (result) {
     // height = +svg_force_graph.attr("height");
     const color = d3.scaleOrdinal(d3.schemeCategory20);
     const graph = toGraph(result);
+    const data = graph.dataConnects;
+    console.log(data);
     const simulation = d3.forceSimulation()
         .force("link", d3.forceLink().id(function(d) { return d.id;}).distance(function (d) {
             return  (1/Math.pow(d.value, DISTANCE_EXP)) * DISTANCE_FACTOR
@@ -152,13 +154,35 @@ const createForceGraph = function (result) {
             //Reduce the opacity of all but the neighbouring nodes
             d = d3.select(this).node().__data__;
             console.log(d);
-            var neighbors = d.id + ": "+ d.index + "\n";
+            var neighbors = d.id + `</br> 
+            <table style='width:100%'> 
+                <tr> 
+                    <th>Target</th> 
+                    <th>%Controversial Commented</th> 
+                    <th>%Noncontroversial Commented</th> 
+                    <th>Source Size</th> 
+                    <th>Target Size</th> 
+                </tr>`;
+            for (i=0; i < data.length; i++) {
+                if (data[i].source = d.id) {
+                    neighbors += 
+                    '<tr>'+
+                    '<th>'+data[i].target+'</th>' +
+                    '<th>'+data[i].value+'</th>' +
+                    '<th>'+data[i].percentNonContro+'</th>' +
+                    '<th>'+data[i].aAuthorCount+'</th>' +
+                    '<th>'+data[i].bAuthorCount+'</th>' +
+                    '</tr>'
+                    
+                }
+            }
             node.style("opacity", function (o) {
                 return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
             });
             link.style("opacity", function (o) {
                 return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
             });
+            neighbors += "</table>";
             document.getElementById('percentages').innerHTML = neighbors;
             //Reduce the op
             toggle = 1;
@@ -168,6 +192,19 @@ const createForceGraph = function (result) {
             link.style("opacity", 1);
             toggle = 0;
         }
+
+
+  // <tr>
+  //   <td>Jill</td>
+  //   <td>Smith</td> 
+  //   <td>50</td>
+  // </tr>
+  // <tr>
+  //   <td>Eve</td>
+  //   <td>Jackson</td> 
+  //   <td>94</td>
+  // </tr>
+
     }
 
     function dragstarted(d) {

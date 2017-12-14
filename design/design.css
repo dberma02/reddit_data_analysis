@@ -51,17 +51,19 @@ section {
   #force_vis {
   }
     #percentages{
-      float:right;
-      display:inline-block;
+      /*float:right;*/
+      /*display:inline-block;*/
       padding-right:40px;
     }
     #force-graph {
-      display:inline-block;
+      /*display:inline-block;*/
     }
   
 #sankey_diagram_window {
 }
   #graph_info {
+    padding-left:50px;
+    padding-right:50px;
 
   }
   #sankey_diagram {

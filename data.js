@@ -1,9 +1,10 @@
 
+
  function toGraph(data) {
      const nodesMap = [];
      const numLinks = [];
+     const dataConnects = [];
      const links = new Array();
-     console.log(data);
      const MAX_NEIGHBORS = 20;
      for(let i = 0; i < data.length; i++) {
 
@@ -12,17 +13,24 @@
          nodesMap[target] = target;
          if (!numLinks[target]) {
              numLinks[target] = 0;
+             dataConnects[target] = 0;
          }
          if (!numLinks[source]) {
              numLinks[source] = 0;
+             dataConnects[source] = 0;
          }
          if (numLinks[target] < MAX_NEIGHBORS) {
              nodesMap[source] = target;
              const value = data[i].f[2].v;
+             const percentNonContro = data[i].f[3].v;
+             const aAuthorCount = data[i].f[4].v;
+             const bAuthorCount = data[i].f[5].v;
              const link = {source, target, value};
+             const connect = {source, target, value, percentNonContro, aAuthorCount, bAuthorCount};
              numLinks[target] += 1;
              numLinks[source] += 1;
              links.push(link);
+             dataConnects.push(connect);
          }
 
     }
@@ -33,7 +41,7 @@
     }
      // console.log("links", links);
      const nodes = dictToArray(nodesMap);
-     const graph = {nodes, links};
+     const graph = {nodes, links, dataConnects};
     // console.log(graph);
     return graph;
 }
@@ -69,7 +77,7 @@ function toSankey(data){
      const links = new Array();
      const targetTotalValue = [];
      const sourceTotalValue = [];
-     console.log(data);
+     // console.log(data);
      const MIN_TARGET_VALUE = 1000;
      const MAX_NEIGHBORS = 30;
      for(let i = 0; i < data.length; i++) { // data.length
@@ -114,8 +122,8 @@ function toSankey(data){
          nodes: nodes,
          links: fixed_links
      };
-     console.log("nodes", nodes);
-     console.log(sourceTotalValue, targetTotalValue);
+     // console.log("nodes", nodes);
+     // console.log(sourceTotalValue, targetTotalValue);
 
     function sortByTotalValue(a, b) {
         if (targetTotalValue[b] && sourceTotalValue[a]) {
@@ -128,7 +136,7 @@ function toSankey(data){
         return b_totalValue - a_totalValue};
     }
 
-    console.log(graph);
+    // console.log(graph);
     return graph;
 
 }

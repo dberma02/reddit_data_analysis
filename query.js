@@ -126,7 +126,6 @@ ORDER BY total_comments_in_controversial DESC, comments_in_subreddit DESC`;
       'query': sankey_query,
     });
     request.execute(function(response) {
-        console.log(response.rows)
         createSankeyDiagram(response.rows);
     });
   }
