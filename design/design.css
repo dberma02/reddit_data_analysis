@@ -3,7 +3,7 @@ body {
   overflow-x: hidden; }
 
 p {
-  font-size: 14px; }
+  font-size: 16px; }
 
 p.small {
   font-size: 8px; }
@@ -39,7 +39,13 @@ section {
   padding-left:50px;
   padding-right: 50px;
 }
+.warning{
+  padding-left: 200px;
+  padding-right:200px;
+  padding-top: 100px;
+  padding-bottom:600px;
 
+}
 section.success {
   color: white;
   background: #720017; }
