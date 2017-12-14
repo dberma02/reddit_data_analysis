@@ -82,7 +82,9 @@ let node = svg.append("g")
 
     node = node
         .data(diagram.nodes)
-        .enter().append("g");
+        .enter().append("g")
+        .on('mouseover', highlightNode)
+        .on('mouseout', highlightNode);
 
     node.append("circle")
         .attr("cx", d => {
@@ -115,5 +117,38 @@ let node = svg.append("g")
 
     node.append("title")
         .text(function(d) { return d.name + "\n" + format(d.value); });
+    var toggle = 0;
+    var linkedByIndex = {};
+    for (i = 0; i < diagram.nodes.length; i++) {
+        linkedByIndex[i + "," + i] = 1;
+    };
+    diagram.links.forEach(function (d) {
+        linkedByIndex[d.source.index + "," + d.target.index] = 1;
+    });
+    function neighboring(a, b) {
+        return linkedByIndex[a.index + "," + b.index];
+    }
+
+    function highlightNode() {
+        if (toggle == 0) {
+            //Reduce the opacity of all but the neighbouring nodes
+            d = d3.select(this).node().__data__;
+            node.style("opacity", function (o) {
+                return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+            });
+            link.style("opacity", function (o) {
+                return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
+            });
+            //Reduce the op
+            toggle = 1;
+        } else {
+            //Put them back to opacity=1
+            node.style("opacity", 1);
+            link.style("opacity", 1);
+            toggle = 0;
+        }
+
+    }
+
 
 };
