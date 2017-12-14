@@ -270,7 +270,8 @@ $.getJSON("sankey_test.json", result => {
     return createSankeyDiagram(result.rows);
 });
 // testSankey(20, 20, 100);
-$.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
+//$.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
+$.getJSON("forceDirectedGraphNewQuery.json", result => graph_simulation = createForceGraph(result.rows));
 
 
 
