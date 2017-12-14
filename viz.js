@@ -80,8 +80,8 @@ const createForceGraph = function (result) {
         .enter()
         .append("g").attr("class", "node")
         .on('mouseover', connectedNodes)
-        .on('mouseout', connectedNodes);
-        // .on('click', connectedNodes);
+        .on('mouseout', connectedNodes)
+        .on('click', connectedData);
     const circle = node
         .append("circle")
         .attr("r", NODE_RADIUS)
@@ -135,6 +135,7 @@ const createForceGraph = function (result) {
     }
     //Toggle stores whether the highlighting is on
     var toggle = 0;
+    var togData = 0;
     //Create an array logging what is connected to what
     var linkedByIndex = {};
     for (i = 0; i < graph.nodes.length; i++) {
@@ -148,13 +149,12 @@ const createForceGraph = function (result) {
     function neighboring(a, b) {
         return linkedByIndex[a.index + "," + b.index];
     }
+    function connectedData () {
+        if (togData == 0) {
+        d = d3.select(this).node().__data__;
+        console.log(d);
 
-    function connectedNodes() {
-        if (toggle == 0) {
-            //Reduce the opacity of all but the neighbouring nodes
-            d = d3.select(this).node().__data__;
-            console.log(d);
-            var neighbors = d.id + `</br> 
+        var neighbors = d.id + `</br> 
             <table style='width:100%'> 
                 <tr> 
                     <th>Target</th> 
@@ -163,27 +163,43 @@ const createForceGraph = function (result) {
                     <th>Source Size</th> 
                     <th>Target Size</th> 
                 </tr>`;
-            for (i=0; i < data.length; i++) {
-                if (data[i].source = d.id) {
-                    neighbors += 
-                    '<tr>'+
-                    '<th>'+data[i].target+'</th>' +
-                    '<th>'+data[i].value+'</th>' +
-                    '<th>'+data[i].percentNonContro+'</th>' +
-                    '<th>'+data[i].aAuthorCount+'</th>' +
-                    '<th>'+data[i].bAuthorCount+'</th>' +
-                    '</tr>'
-                    
-                }
+        for (i=0; i < data.length; i++) {
+            if (data[i].source = d.id) {
+                console.log(data[i].source + "  "+ d.id);
+                neighbors += 
+                '<tr>'+
+                '<th>'+data[i].source+'</th>' +
+                '<th>'+data[i].target+'</th>' +
+                '<th>'+data[i].value+'</th>' +
+                '<th>'+data[i].percentNonContro+'</th>' +
+                '<th>'+data[i].aAuthorCount+'</th>' +
+                '<th>'+data[i].bAuthorCount+'</th>' +
+                '</tr>'
+                
             }
+        }
+        neighbors += "</table>";
+        document.getElementById('percentages').innerHTML = neighbors;
+        togData = 1;
+    }
+    else {
+        togData = 0;
+        document.getElementById('percentages').innerHTML = '';
+    }
+    }
+    function connectedNodes() {
+        if (toggle == 0) {
+            //Reduce the opacity of all but the neighbouring nodes
+            d = d3.select(this).node().__data__;
+            console.log(d);
+
             node.style("opacity", function (o) {
                 return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
             });
             link.style("opacity", function (o) {
                 return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
             });
-            neighbors += "</table>";
-            document.getElementById('percentages').innerHTML = neighbors;
+            
             //Reduce the op
             toggle = 1;
         } else {
@@ -191,6 +207,7 @@ const createForceGraph = function (result) {
             node.style("opacity", 1);
             link.style("opacity", 1);
             toggle = 0;
+            // 
         }
 
 
