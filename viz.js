@@ -3,7 +3,7 @@ var dist_factor;
 var dist_exp;
 var charge_str;
 const createForceGraph = function (result) {
-    const width = window.innerWidth;
+    const width = 2*window.innerWidth/3;
     const height = window.innerHeight;
     const NODE_RADIUS = 10;
     const LINE_WEIGHT_FACTOR = 0.05;
@@ -151,12 +151,15 @@ const createForceGraph = function (result) {
         if (toggle == 0) {
             //Reduce the opacity of all but the neighbouring nodes
             d = d3.select(this).node().__data__;
+            console.log(d);
+            var neighbors = d.id + ": "+ d.index + "\n";
             node.style("opacity", function (o) {
                 return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
             });
             link.style("opacity", function (o) {
                 return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
             });
+            document.getElementById('percentages').innerHTML = neighbors;
             //Reduce the op
             toggle = 1;
         } else {
