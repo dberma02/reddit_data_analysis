@@ -60,7 +60,16 @@ FROM (
           FROM
             [fh-bigquery:reddit_comments.all]
           WHERE
-            subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european')
+            subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 
+                          'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 
+                          'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers',
+                          'DarkNetMarkets', 'european', 'altright','MetaCanada','UncensoredNews',
+                          'Imgoingtohellforthis', 'CringeAnarchy','DankMemes','KotakuInAction', 'TumblrInAction',
+                          'PussyPass', 'PussyPassDenied','MGTOW','far_right', 'Nazi',
+                          'racoonsareniggers', 'DylannRoofInnocent', 'ReallyWackyTicTacs', 'whitesarecriminals',
+                          'Polacks', 'SexWithDogs', 'SexWithHorses', 'bestiality', 'picsofcaninevaginas',
+                          'zoogold', 'picsofdeadkids', 'picsofcaninedicks', 'tailbait', 'horsecock', 'horsevagina',
+                          'killthejews', 'killthejews', 'selfharmpics','EuropeanNationalism', 'pol')
           GROUP BY
             2 ),author) ) b
     ON
@@ -96,7 +105,17 @@ FROM(
               (SELECT author, subreddit, COUNT(*) OVER(PARTITION BY author) total_comments
            
                 FROM [fh-bigquery:reddit_comments.all]
-                WHERE subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european')
+                WHERE 
+		  subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 
+				'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 
+				'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers',
+				'DarkNetMarkets', 'european', 'altright','MetaCanada','UncensoredNews',
+				'Imgoingtohellforthis', 'CringeAnarchy','DankMemes','KotakuInAction', 'TumblrInAction',
+				'PussyPass', 'PussyPassDenied','MGTOW','far_right', 'Nazi',
+				'racoonsareniggers', 'DylannRoofInnocent', 'ReallyWackyTicTacs', 'whitesarecriminals',
+				'Polacks', 'SexWithDogs', 'SexWithHorses', 'bestiality', 'picsofcaninevaginas',
+				'zoogold', 'picsofdeadkids', 'picsofcaninedicks', 'tailbait', 'horsecock', 'horsevagina',
+				'killthejews', 'killthejews', 'selfharmpics','EuropeanNationalism', 'pol')
                 AND author NOT IN (SELECT author FROM [fh-bigquery:reddit_comments.bots_201505])
                 AND author != "[deleted]"
                 AND NOT LOWER(author) CONTAINS "bot"))
