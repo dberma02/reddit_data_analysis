@@ -24,7 +24,7 @@ FROM (
     shared_author_count,
     COUNT(*) OVER(PARTITION BY sub_a) sub_ac,
     sub_bc,
-    DENSE_RANK() OVER(PARTITION BY sub_B ORDER BY percent_of_contro_shared DESC) _rank
+    RANK() OVER(PARTITION BY sub_B ORDER BY percent_of_contro_shared DESC) _rank
   FROM (
     SELECT
       a.subreddit sub_a,
