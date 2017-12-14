@@ -30,8 +30,37 @@ const createForceGraph = function (result) {
         }))
         .force("charge", d3.forceManyBody().strength(CHARGE_STRENGTH))
         .force("center", d3.forceCenter(width / 2, height / 2));
-
-
+//ARROW MARKERS
+    svg_force_graph.append("defs").selectAll("marker")
+        .data(["suit", "licensing", "resolved"])
+        .enter().append("marker")
+        .attr("id", function(d) { return d; })
+        .attr("viewBox", "0 -5 10 10")
+        .attr("refX", 25)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .append("path")
+        .attr("d", "M0,-5L10,0L0,5 L10,0 L0, -5")
+        .style("stroke", "#4679BD")
+        .style("opacity", "0.6");
+//FISHEYE
+    /*
+    const fisheye = d3.fisheye.circular()
+        .radius(120);
+    svg_force_graph.on("mousemove", function() {
+        fisheye.focus(d3.mouse(this));
+        d3.selectAll("circle").each(function(d) { d.fisheye = fisheye(d); })
+            .attr("cx", function(d) { return d.fisheye.x; })
+            .attr("cy", function(d) { return d.fisheye.y; })
+            .attr("r", function(d) { return d.fisheye.z * 8; });
+        link.attr("x1", function(d) { return d.source.fisheye.x; })
+            .attr("y1", function(d) { return d.source.fisheye.y; })
+            .attr("x2", function(d) { return d.target.fisheye.x; })
+            .attr("y2", function(d) { return d.target.fisheye.y; });
+    });
+*/
     const link = svg_force_graph.append("g")
         .attr("class", "links")
         .selectAll("line")
@@ -39,7 +68,8 @@ const createForceGraph = function (result) {
         .enter().append("line")
         .attr("stroke-width", function (d) {
             return Math.pow(d.value , LINE_WEIGHT_EXP)*LINE_WEIGHT_FACTOR;
-        });
+        })
+.style("marker-end",  "url(#suit)");// Modified line
 
     const node = svg_force_graph.append("g")
         .attr("class", "nodes")
@@ -47,7 +77,9 @@ const createForceGraph = function (result) {
         .data(graph.nodes)
         .enter()
         .append("g").attr("class", "node")
-        .on('dblclick', connectedNodes);
+        .on('mouseover', connectedNodes)
+        .on('mouseout', connectedNodes);
+        // .on('click', connectedNodes);
     const circle = node
         .append("circle")
         .attr("r", NODE_RADIUS)

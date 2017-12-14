@@ -19,7 +19,7 @@ let link = svg.append("g")
     .attr("class", "links")
     .attr("fill", "none")
     .attr("stroke", "#000")
-    .attr("stroke-opacity", 0.8)
+    .attr("stroke-opacity", 0.5)
     .selectAll("path");
 
 let node = svg.append("g")
@@ -115,4 +115,5 @@ let node = svg.append("g")
 
     node.append("title")
         .text(function(d) { return d.name + "\n" + format(d.value); });
+
 };
