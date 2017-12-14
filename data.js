@@ -1,3 +1,4 @@
+
  function toGraph(data) {
      const nodesMap = [];
      const numLinks = [];
