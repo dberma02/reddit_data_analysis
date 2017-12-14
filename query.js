@@ -89,7 +89,7 @@ ORDER BY
   var sankey_query = `SELECT author, subreddit, comments_in_subreddit,  total_comments_in_controversial, _rank
 FROM(
 SELECT author, subreddit, comments_in_subreddit,  total_comments_in_controversial, 
-       DENSE_RANK() OVER(ORDER BY total_comments_in_controversial DESC) _rank
+       RANK() OVER(ORDER BY total_comments_in_controversial DESC) _rank
 FROM(
   (SELECT author, subreddit, comments_in_subreddit, total_comments total_comments_in_controversial
    FROM
