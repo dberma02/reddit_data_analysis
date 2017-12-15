@@ -49,12 +49,8 @@ section {
   #force_vis {
   }
     #percentages{
-      /*float:right;*/
-      /*display:inline-block;*/
-      padding-right:40px;
     }
     #force-graph {
-      /*display:inline-block;*/
     }
   
 #sankey_diagram_window {
