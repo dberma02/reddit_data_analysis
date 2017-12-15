@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3241d045-202d-4258-a0f8-96fd1981019b" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/design/classic-min.css" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/data.js" afterPath="$PROJECT_DIR$/data.js" />
+      <change beforePath="$PROJECT_DIR$/design/design.css" afterPath="$PROJECT_DIR$/design/design.css" />
       <change beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change beforePath="$PROJECT_DIR$/query.js" afterPath="$PROJECT_DIR$/query.js" />
       <change beforePath="$PROJECT_DIR$/sankey.js" afterPath="$PROJECT_DIR$/sankey.js" />
       <change beforePath="$PROJECT_DIR$/viz.js" afterPath="$PROJECT_DIR$/viz.js" />
     </list>
@@ -24,17 +26,17 @@
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="501">
-              <caret line="95" column="21" lean-forward="false" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
+              <caret line="119" column="13" lean-forward="false" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="query.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="query.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/query.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="821">
-              <caret line="247" column="20" lean-forward="false" selection-start-line="247" selection-start-column="20" selection-end-line="247" selection-end-column="20" />
+            <state relative-caret-position="227">
+              <caret line="239" column="11" lean-forward="false" selection-start-line="239" selection-start-column="11" selection-end-line="239" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -63,13 +65,26 @@
       <file leaf-file-name="viz.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/viz.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="551">
-              <caret line="366" column="0" lean-forward="false" selection-start-line="366" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
+            <state relative-caret-position="336">
+              <caret line="373" column="38" lean-forward="false" selection-start-line="373" selection-start-column="38" selection-end-line="373" selection-end-column="38" />
               <folding>
-                <marker date="1513368809000" expanded="true" signature="5594:6003" ph="..." />
-                <marker date="1513368809000" expanded="true" signature="5639:5979" ph="..." />
-                <marker date="1513368809000" expanded="true" signature="5660:5954" ph="..." />
+                <marker date="1513369034000" expanded="true" signature="6021:6430" ph="..." />
+                <marker date="1513369034000" expanded="true" signature="6066:6406" ph="..." />
+                <marker date="1513369034000" expanded="true" signature="6087:6381" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="30">
+                <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -78,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/data.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="467">
-              <caret line="91" column="13" lean-forward="true" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
+              <caret line="91" column="13" lean-forward="false" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -87,8 +102,8 @@
       <file leaf-file-name="sankey.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sankey.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+            <state relative-caret-position="266">
+              <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -120,6 +135,7 @@
       <find>transition</find>
       <find>filterMinTa</find>
       <find>data</find>
+      <find>HEAD</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -142,10 +158,10 @@
         <option value="$PROJECT_DIR$/search.js" />
         <option value="$PROJECT_DIR$/query.js" />
         <option value="$PROJECT_DIR$/graph.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/d3-sankey.js" />
         <option value="$PROJECT_DIR$/data.js" />
         <option value="$PROJECT_DIR$/sankey.js" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/viz.js" />
       </list>
     </option>
@@ -267,7 +283,7 @@
       <workItem from="1512338974590" duration="649000" />
       <workItem from="1512408750178" duration="4342000" />
       <workItem from="1512516982324" duration="8954000" />
-      <workItem from="1512766075069" duration="64496000" />
+      <workItem from="1512766075069" duration="64857000" />
     </task>
     <task id="LOCAL-00001" summary="Linked files">
       <created>1512339339443</created>
@@ -294,7 +310,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78441000" />
+    <option name="totallyTimeSpent" value="78802000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="324" y="23" width="1067" height="834" extended-state="0" />
@@ -376,9 +392,9 @@
         <state relative-caret-position="705">
           <caret line="47" column="17" lean-forward="false" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
           <folding>
-            <marker date="1513368809000" expanded="true" signature="5594:6003" ph="..." />
-            <marker date="1513368809000" expanded="true" signature="5639:5979" ph="..." />
-            <marker date="1513368809000" expanded="true" signature="5660:5954" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6021:6430" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6066:6406" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6087:6381" ph="..." />
           </folding>
         </state>
       </provider>
@@ -436,9 +452,9 @@
         <state relative-caret-position="240">
           <caret line="16" column="43" lean-forward="false" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
           <folding>
-            <marker date="1513368809000" expanded="true" signature="5594:6003" ph="..." />
-            <marker date="1513368809000" expanded="true" signature="5639:5979" ph="..." />
-            <marker date="1513368809000" expanded="true" signature="5660:5954" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6021:6430" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6066:6406" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6087:6381" ph="..." />
           </folding>
         </state>
       </provider>
@@ -555,26 +571,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="95" column="21" lean-forward="false" selection-start-line="95" selection-start-column="21" selection-end-line="95" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sankey_test.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-9362">
           <caret line="39943" column="16" lean-forward="false" selection-start-line="39943" selection-start-column="16" selection-end-line="39943" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sankey.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -595,31 +595,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sankey.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="88" column="0" lean-forward="false" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/data.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="467">
-          <caret line="91" column="13" lean-forward="true" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
+          <caret line="91" column="13" lean-forward="false" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="119" column="13" lean-forward="false" selection-start-line="119" selection-start-column="13" selection-end-line="119" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/query.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="239" column="11" lean-forward="false" selection-start-line="239" selection-start-column="11" selection-end-line="239" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/viz.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="366" column="0" lean-forward="false" selection-start-line="366" selection-start-column="0" selection-end-line="366" selection-end-column="0" />
+        <state relative-caret-position="336">
+          <caret line="373" column="38" lean-forward="false" selection-start-line="373" selection-start-column="38" selection-end-line="373" selection-end-column="38" />
           <folding>
-            <marker date="1513368809000" expanded="true" signature="5594:6003" ph="..." />
-            <marker date="1513368809000" expanded="true" signature="5639:5979" ph="..." />
-            <marker date="1513368809000" expanded="true" signature="5660:5954" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6021:6430" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6066:6406" ph="..." />
+            <marker date="1513369034000" expanded="true" signature="6087:6381" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/query.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="821">
-          <caret line="247" column="20" lean-forward="false" selection-start-line="247" selection-start-column="20" selection-end-line="247" selection-end-column="20" />
-          <folding />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="30">
+            <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

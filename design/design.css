@@ -5,7 +5,7 @@ p {
   font-size: 16px; }
 
 p.small {
-  font-size: 8px; }
+  font-size: 12px; }
 
 a,
 a.active,
@@ -19,10 +19,12 @@ h1,
 h2,
 h3,
 h4,
-h5,
 h6 {
   font-weight: 700;
   text-transform: uppercase; }
+h5 {
+  
+}
 section {
   padding: 100px 0; }
   section h2 {
@@ -31,7 +33,7 @@ section {
 .warning{
   padding-left: 200px;
   padding-right:200px;
-  padding-top: 100px;
+  padding-top: 200px;
   padding-bottom:600px;
 
 }
@@ -44,17 +46,10 @@ section {
   #graph_info {
   padding-left:50px;
   padding-right:50px;
-  float:top;
   }
   #force_vis {
   }
-    #percentages{
-      /*float:right;*/
-      /*display:inline-block;*/
-      padding-right:40px;
-    }
-    #force-graph {
-      /*display:inline-block;*/
+  #force-graph {
     }
   
 #sankey_diagram_window {
@@ -132,4 +127,3 @@ section.success {
       #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
         color: white;
         background: #270101; }
-

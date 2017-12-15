@@ -82,13 +82,10 @@ let node = svg.append("g")
     });
     link.append("title")
         .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
-
     node = node
         .data(diagram.nodes)
-        .enter()
-        .append("g")
-        .on('mouseover', highlightNode)
-        .on('mouseout', highlightNode);
+        .enter().append("g")
+        .on('click', highlightNode);
 
     node.append("circle")
         .attr("cx", d => {
@@ -138,11 +135,27 @@ let node = svg.append("g")
             //Reduce the opacity of all but the neighbouring nodes
             d = d3.select(this).node().__data__;
             node.style("opacity", function (o) {
-                return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+                return (neighboring(d, o) | neighboring(o, d)) ? 1 : 0.1; 
             });
             link.style("opacity", function (o) {
                 return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
             });
+            // if(d.targetLinks.length <= 0) {
+            //     node.style("opacity", function (o) {
+            //         return neighboring(d, o) ? 1 : 0.1; 
+            //     });
+            //     link.style("opacity", function (o) {
+            //         return d.index==o.source.index ? 1 : 0.1;
+            //     });
+            // }
+            // else {
+            //     node.style("opacity", function (o) {
+            //         return neighboring(o, d) ? 1 : 0.1; 
+            //     });
+            //     link.style("opacity", function (o) {
+            //         return d.index==o.target.index ? 1 : 0.1;
+            //     });
+            // }
             //Reduce the op
             toggle = 1;
         } else {

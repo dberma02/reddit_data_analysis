@@ -9,7 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Custom Stylesheet -->
     <link href="design/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="design/classic-min.css" rel="stylesheet">
     <link href="design/design.css" rel="stylesheet">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
@@ -17,71 +19,93 @@
     <script src="https://apis.google.com/js/client.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    
 
     </head>
 
-    <body>
+    <body data-spy="scroll" data-target="#mainNav" data-offset="0">
      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Reddit Data Analysis</a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#force_graph">Subreddit Connections</a>
+              <a class="nav-link js-scroll-trigger" href="#force_graph_window">Subreddit Connections</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#sankey_diagram">Commenter Relationships</a>
+              <a class="nav-link js-scroll-trigger" href="#sankey_diagram_window">Commenter Relationships</a>
             </li>
           </ul>
       </div>
     </nav>
-    <div class="header">
-        <div class="container">
-            <div class="warning">
-            <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
+        <div class="header">
+            <div class="container">
+                <div class="warning">
+                    <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
+                    <h5> This is an investigation of hate communities, as well as other communities on reddit that have spurred controversy over their content. Many of these subreddits contain violent, graphic, and bigoted names. We do not show any content from any of these subreddits. </h5>
+                </div>
+                <p>Reddit claims to be the front page of the internet. According to a Nov, 2017 Huffington Post article, reddit has over 300 million monthly users worldwide. There has been much controversy over reddit&rsquo;s relaxed policy towards policing content on its site. The first of these publicised controversies occurred in 2011, when an investigation by Anderson Cooper on CNN brought the content of one subreddit &ldquo;r/jailbait&rdquo; to the public attention. This subreddit, an online message board where contributors can share links and images, and comment on existing posts, contained naked images of teenage women. Pressure from the public in response to blatant child pornography on the forum caused Reddit to remove the forum.</p>
+                <p>Reddit has been an advocate for free speech. In 2012, in response to a different controversy, Yishan Wong, the CEO at the time, stated, &ldquo;We stand for free speech. This means we are not going to ban distasteful subreddits. We will not ban legal content even if we find it odious or if we personally condemn it.&rdquo; The company has slowly become more stringent about the subreddit forums it allows on its website. Only this fall, did the company change its policy to prevent content that &ldquo;encourages, glorifies, incites, or calls for violence or physical harm against an individual or a group of people&rdquo;. Since then, pages such as &ldquo;r/Nazi&rdquo;, &ldquo;r/NationalSocialism&rdquo;, &ldquo;r/DylannRoofInnocent&rdquo; have been banned from the site.</p>
+
+                <p>This investigation looks at hate communities, and other communities on reddit that have spurred controversy over their content. We examine a list of these subreddits, compiled from wikipedia <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities"> wikipedia</a> as well as a <a   href="https://www.vice.com/en_nz/article/8xxymb/here-are-reddits-whiniest-most-low-key-toxic-subreddits" > Vice Article </a> and a <a   href=”https://www.huffingtonpost.com/entry/reddit-and-violent-speech-can-hate-be-banned_us_5a008815e4b0d467d4c226e4”> HuffingtonPost Article.</a> Many of them have been removed by Reddit. </p>
+                <p>We aim to use visualizations to cast light on the way that active members of these communities interact with the rest of reddit. Reddit allows commenters to post in any public subreddit so redditors who comment in controversial subreddits have the ability to post their views and opinions in other communities. While you may check a commenter&rsquo;s post history to see where else they have commented, most users do not. In this investigation, we want to see how insulated these controversial communities are from the rest of reddit. If they are not, then it is possible that these views have a larger influence on mainstream reddit communities than previously thought. We illustrate these relationships in two diagrams: a force directed graph, and a sankey diagram.</p>
+                <h2>The Data</h2>
+                <p>We used the reddit comments dataset available to the public on Google bigQuery. All of our queries were conducted over the entire dataset of reddit comments. Except a few subreddits that were removed before the creation of this database, the database holds all comments in the history of Reddit.</p>
             </div>
-            <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
-            <h3> Goals: </h3>
-            <ul>
-                <li>Examine controversial communities on reddit</li>
-                <ul>
-                    <li>Specifically look at controversial hate commmunities.</li>
-                    <li>See how these groups have changed over time in:</li>
-                    <ul>
-                        <li>Active contributors</li>
-                        <li>Upvotes</li>
-                        <li>Influence on non-controversial subreddits</li>
-                    </ul>
-                </ul>
-                <li>Effects of banning on the impact of controversial communities and hate speech</li>
-                <ul>
-                    <li>Activity on non-controversial subreddits</li>
-                    <li>Has admin intervention stemmed the growth of hate speech</li>
-                </ul>
-            </ul>
         </div>
-    </div>
+
         <section id="force_graph_window">
             <div class="container">
                 <div class="graph_info">
-                    <h2>Subreddit Connections</h2>
-                    <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
+                    <h2 id="force_info">Subreddit Connections</h2>
+                    <p>This graph shows helps us pick apart the activity on of those who comment in the controversial subreddits. For each controversial subreddit in our list, we looked at the top 10 other pages where commenters from the chosen subreddit were also commenting. In this sense, the graph shows the top subreddits which are most popular among users in each controversial subreddit in our list. </p>
+                    <p>You can also click to toggle the data to show a different relationship. As a main goal of our investigation, we want to show how Reddit users who are active in the controversial subreddits interact with the rest of the website. When you click to toggle the dataset, the graph will show which generic subreddits have the highest percentage of commenters who also comment in controversial subreddits. Because we aim to look at the way those who comment in controversial subreddits interact with the rest of the reddit community, for this dataset, we prioritized the size of crossover nodes, as well as the percentage of commenters who also comment in controversial subreddits. For larger subreddits, the threshold of commenters shared with controversial subreddits is lower, because 3% or 6% of a reddit with 6,000,000 commenters, is still notable.</p>
                 </div>
-            <section id="force_vis">
-                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="fishEyeToggle">
-                    Fisheye
-                </button>
-                <svg width="500" height="500" id="force-graph"></svg>
-                 <div id="table"></div>
-            </section>
-             </div>
+            </div>
+            <div class="fluid-container">
+                <section id="force_vis">
+                    <div class="float-left">
+                      <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-primary active" id="fdgQuery1" >
+                          <input type="radio" name="options" id="fdgQuery1" autocomplete="off" checked>Where else Controversial Contributors like to Comment
+                          </label>
+                        <label class="btn btn-primary" id="fdgQuery2">
+                          <input type="radio" name="options" id="fdgQuery2" autocomplete="off">Large Subreddits with High Concentration of Controversial Contributors
+                          </label>
+                      </div>
+                    </div>
+                    <div class="float-right">
+                    <button type="button" class="btn btn-outline-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="fishEyeToggle">
+                        Fisheye
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="increaseRepulsion">
+                        Increase Repulsion
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="decreaseRepulsion">
+                        Decrease Repulsion
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="shrinkLink">
+                        Shrink Link 
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="growLink">
+                        Grow Link 
+                    </button>
+                    <svg width="500" height="500" id="force-graph"></svg>
+                     <div id="table"></div>
+                </section>
+            </div>
         </section>
         <section id="sankey_diagram_window">
-            <div class="graph_info">
-                <h2>Commenter Relationships</h2>
-                <p>In this sankey diagram, we took a look at the most prolific commenters who have commented on a controversial subreddit and looked to see what other subreddits they have commented in.</p>
+            <div class="container">
+                <div class="graph_info">
+                    <br>
+                    <h2>Top Commenters</h2>
+                    <br>
+                    <p>This sankey diagram focuses on the 10 most prolific contributors to Subreddits in our list, and shows the distribution of their activity across Reddit. Commenters are displayed on the left, and the subreddits that they contribute to most are shown on the right. The thickness of the lines connecting user to subreddit indicates how many comments that user has contributed to a specific subreddit.</p> 
+
+                </div>
             </div>
-            <svg width="1200" height="800" id="sankey-diagram"></svg>
+            <div class="fluid-container">
+                <svg width="1200" height="800" id="sankey-diagram"></svg>
+            </div>
         </section>
     <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="d3-sankey.js"></script>
@@ -92,7 +116,7 @@
         <!--<script src="https://unpkg.com/d3-shape@1"></script>-->
         <!--<script src="https://unpkg.com/d3-sankey@0"></script>-->
     <script src="data.js"></script>
-    <!--<script src="query.js"></script>-->
+    <script src="query.js"></script>
     <script src="sankey.js"></script>
     <script src="viz.js"></script>
 
