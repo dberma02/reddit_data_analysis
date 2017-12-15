@@ -3,7 +3,7 @@ var dist_factor;
 var dist_exp;
 var charge_str;
 const createForceGraph = function (result) {
-    const width = 2*window.innerWidth/3;
+    const width = window.innerWidth;
     const height = window.innerHeight;
     const NODE_RADIUS = 10;
     const LINE_WEIGHT_FACTOR = 0.05;
