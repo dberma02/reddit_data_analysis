@@ -157,6 +157,7 @@ const createForceGraph = function (result) {
         var neighbors = d.id + `</br> 
             <table style='width:100%'> 
                 <tr> 
+                    <th>Source</th> 
                     <th>Target</th> 
                     <th>%Controversial Commented</th> 
                     <th>%Noncontroversial Commented</th> 
@@ -176,6 +177,18 @@ const createForceGraph = function (result) {
                 '<th>'+data[i].bAuthorCount+'</th>' +
                 '</tr>'
                 
+            }
+            else if (data[i].target == d.id) {
+                console.log(data[i].target + "  "+ d.id);
+                neighbors += 
+                '<tr>'+
+                '<th>'+data[i].source+'</th>' +
+                '<th>'+data[i].target+'</th>' +
+                '<th>'+data[i].value+'</th>' +
+                '<th>'+data[i].percentNonContro+'</th>' +
+                '<th>'+data[i].aAuthorCount+'</th>' +
+                '<th>'+data[i].bAuthorCount+'</th>' +
+                '</tr>'  
             }
         }
         neighbors += "</table>";
