@@ -2,6 +2,14 @@ var graph_simulation;
 var dist_factor;
 var dist_exp;
 var charge_str;
+let FISHEYE_ENABLED = false;
+
+//FISHEYE TOGGLE CLICK HANDLER
+$("#fishEyeToggle").click(() => {
+    FISHEYE_ENABLED = !FISHEYE_ENABLED;
+});
+
+
 const createForceGraph = function (result) {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -48,12 +56,13 @@ const createForceGraph = function (result) {
         .style("stroke", "#4679BD")
         .style("opacity", "0.6");
 //FISHEYE
-    /*
+
     const fisheye = d3.fisheye.circular()
         .radius(120);
     svg_force_graph.on("mousemove", function() {
+        if (FISHEYE_ENABLED) {
         fisheye.focus(d3.mouse(this));
-        d3.selectAll("circle").each(function(d) { d.fisheye = fisheye(d); })
+        circle.each(function(d) { d.fisheye = fisheye(d); })
             .attr("cx", function(d) { return d.fisheye.x; })
             .attr("cy", function(d) { return d.fisheye.y; })
             .attr("r", function(d) { return d.fisheye.z * 8; });
@@ -61,8 +70,9 @@ const createForceGraph = function (result) {
             .attr("y1", function(d) { return d.source.fisheye.y; })
             .attr("x2", function(d) { return d.target.fisheye.x; })
             .attr("y2", function(d) { return d.target.fisheye.y; });
+        }
     });
-*/
+
     const link = svg_force_graph.append("g")
         .attr("class", "links")
         .selectAll("line")
@@ -79,19 +89,19 @@ const createForceGraph = function (result) {
         .data(graph.nodes)
         .enter()
         .append("g").attr("class", "node")
-        .on('mouseover', connectedNodes)
-        .on('mouseout', connectedNodes)
-        .on('click', connectedData);
-    const circle = node
-        .append("circle")
-        .attr("r", NODE_RADIUS)
-        .attr("fill", function (d) {
-            return color(d.group);
-        })
         .call(d3.drag()
             .on("start", dragstarted)
             .on("drag", dragged)
-            .on("end", dragended));
+            .on("end", dragended))
+        .on('mouseover', connectedNodes)
+        .on('click', () => toggle = 1)
+        .on('mouseout', connectedNodes)
+        .on('click', connectedData);
+    const circle = node.append("circle")
+        .attr("r", NODE_RADIUS)
+        .attr("fill", function (d) {
+            return color(d.group);
+        });
 
     const label = node.append("text")
         .attr("dx", TEXT_OFFSET)
@@ -122,16 +132,22 @@ const createForceGraph = function (result) {
                 return d.target.y;
             });
 
-        node
-            .attr("transform", function (d) {
-                return `translate(${d.x}, ${d.y})`;
-            });
-        /*.attr("cx", function (d) {
+        circle
+            // .attr("transform", function (d) {
+            //     return `translate(${d.x}, ${d.y})`;
+            // });
+        .attr("cx", function (d) {
             return d.x;
         })
         .attr("cy", function (d) {
             return d.y;
-        });*/
+        });
+
+        label.attr("x", function (d) {
+            return d.x;
+        }).attr("y", function (d) {
+            return d.y;
+        });
     }
     //Toggle stores whether the highlighting is on
     var toggle = 0;
@@ -207,10 +223,10 @@ const createForceGraph = function (result) {
         if (toggle == 0) {
             //Reduce the opacity of all but the neighbouring nodes
             d = d3.select(this).node().__data__;
-            node.style("opacity", function (o) {
+            node.transition().duration(150).style("opacity", function (o) {
                 return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
             });
-            link.style("opacity", function (o) {
+            link.transition().duration(150).style("opacity", function (o) {
                 return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
             });
             
@@ -218,8 +234,8 @@ const createForceGraph = function (result) {
             toggle = 1;
         } else {
             //Put them back to opacity=1
-            node.style("opacity", 1);
-            link.style("opacity", 1);
+            node.transition().duration(150).style("opacity", 1);
+            link.transition().duration(150).style("opacity", 1);
             toggle = 0;
             // 
         }
@@ -239,17 +255,20 @@ const createForceGraph = function (result) {
     }
 
     function dragstarted(d) {
+        toggle = 1;
         if (!d3.event.active) simulation.alphaTarget(0.3).restart();
         d.fx = d.x;
         d.fy = d.y;
     }
 
     function dragged(d) {
+        toggle = 1;
         d.fx = d3.event.x;
         d.fy = d3.event.y;
     }
 
     function dragended(d) {
+        toggle = 1;
         if (!d3.event.active) simulation.alphaTarget(0);
         d.fx = null;
         d.fy = null;
@@ -341,8 +360,7 @@ function testSankey(numNodes, numLinks, maxValue) {
 //     return createSankeyDiagram(result.rows);
 // });
 // testSankey(20, 20, 100);
-//$.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
+// $.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
 // $.getJSON("forceDirectedGraphNewQuery.json", result => graph_simulation = createForceGraph(result.rows));
-
 
 

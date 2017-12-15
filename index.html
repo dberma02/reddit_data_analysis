@@ -10,8 +10,10 @@
     <!-- Custom Stylesheet -->
     <link href="design/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="design/design.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="https://apis.google.com/js/client.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -65,11 +67,14 @@
                     <h2>Subreddit Connections</h2>
                     <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
                 </div>
-                <section id="force_vis">
-                    <svg width="500" height="500" id="force-graph"></svg>
-                     <div id="table"></div>
-                </section>
-            </div>
+            <section id="force_vis">
+                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="fishEyeToggle">
+                    Fisheye
+                </button>
+                <svg width="500" height="500" id="force-graph"></svg>
+                 <div id="table"></div>
+            </section>
+             </div>
         </section>
         <section id="sankey_diagram_window">
             <div class="graph_info">
@@ -88,7 +93,6 @@
         <!--<script src="https://unpkg.com/d3-sankey@0"></script>-->
     <script src="data.js"></script>
     <script src="query.js"></script>
-    <!--<script src="query.js"></script>-->
     <script src="sankey.js"></script>
     <script src="viz.js"></script>
 
