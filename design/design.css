@@ -19,10 +19,12 @@ h1,
 h2,
 h3,
 h4,
-h5,
 h6 {
   font-weight: 700;
   text-transform: uppercase; }
+h5 {
+  
+}
 section {
   padding: 100px 0; }
   section h2 {
@@ -125,4 +127,3 @@ section.success {
       #mainNav .navbar-nav > li.nav-item > a.nav-link.active:active, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:focus, #mainNav .navbar-nav > li.nav-item > a.nav-link.active:hover {
         color: white;
         background: #270101; }
-

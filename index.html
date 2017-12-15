@@ -39,26 +39,13 @@
             <div class="container">
                 <div class="warning">
                     <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
+                    <h5> This is an investigation of hate communities, as well as other communities on reddit that have spurred controversy over their content. Many of these subreddits contain violent, graphic, and bigoted names. We do not show any content from any of these subreddits. </h5>
                 </div>
-                <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
-                <h3> Goals: </h3>
-                <ul>
-                    <li>Examine controversial communities on reddit</li>
-                    <ul>
-                        <li>Specifically look at controversial hate commmunities.</li>
-                        <li>See how these groups have changed over time in:</li>
-                        <ul>
-                            <li>Active contributors</li>
-                            <li>Upvotes</li>
-                            <li>Influence on non-controversial subreddits</li>
-                        </ul>
-                    </ul>
-                    <li>Effects of banning on the impact of controversial communities and hate speech</li>
-                    <ul>
-                        <li>Activity on non-controversial subreddits</li>
-                        <li>Has admin intervention stemmed the growth of hate speech</li>
-                    </ul>
-                </ul>
+                <p>Reddit claims to be the front page of the internet. According to a Nov, 2017 Huffington Post article, reddit has over 300 million monthly users worldwide. There has been much controversy over reddit’s relaxed policy towards policing content on its site. The first of these publicised controversies occurred in 2011, when an investigation by Anderson Cooper on CNN brought the content of one subreddit “r/jailbait” to the public attention. This subreddit, an online message board where contributors can share links and images, and comment on existing posts, contained naked images of teenage women. Pressure from the public in response to blatant  child pornography on the forum caused Reddit to remove the forum.</p>
+                <p>Reddit has been an advocate for free speech. In 2012, in response to a different controversy, Yishan Wong, the CEO at the time, stated, “We stand for free speech. This means we are not going to ban distasteful subreddits. We will not ban legal content even if we find it odious or if we personally condemn it.” The company has slowly become more stringent about the subreddit forums it allows on its website. Only this fall, did the company change its policy to prevent content that “encourages, glorifies, incites, or calls for violence or physical harm against an individual or a group of people”. Since then, pages such as “r/Nazi”, “r/NationalSocialism”, “r/DylannRoofInnocent” have been banned from the site. </p>
+
+                <p>This investigation looks at hate communities, and other communities on reddit that have spurred controversy over their content. We examine a list of these subreddits, compiled from wikipedia <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities"> wikipedia</a> as well as a <a   href="https://www.vice.com/en_nz/article/8xxymb/here-are-reddits-whiniest-most-low-key-toxic-subreddits" > Vice Article </a> and a <a   href=”https://www.huffingtonpost.com/entry/reddit-and-violent-speech-can-hate-be-banned_us_5a008815e4b0d467d4c226e4”> HuffingtonPost Article.</a> Many of them have been removed by Reddit. </p>
+                <p>We aim to use visualizations to cast light on the way that active members of these communities interact with the rest of reddit. Reddit allows commenters to post in any public subreddit so redditors who comment in controversial subreddits have the ability to post their views and opinions in other communities. While you may check a commenter’s post history to see where else they have commented, most users do not. In this investigation, we want to see how insulated these controversial communities are from the rest of reddit. If they are not, then it is possible that these views have a larger influence on mainstream reddit communities than previously thought. We illustrate these relationships in two diagrams: a force directed graph, and a sankey diagram. </p>
             </div>
         </div>
 
@@ -66,11 +53,13 @@
             <div class="container">
                 <div class="graph_info">
                     <h2 id="force_info">Subreddit Connections</h2>
-                    <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
+                    <p>This graph shows helps us pick apart the activity on of those who comment in the controversial subreddits. For each controversial subreddit in our list, we looked at the top 10 other pages where commenters from the chosen subreddit were also commenting. In this sense, the graph shows the top subreddits which are most popular among users in each controversial subreddit in our list. </p>
+                    <p>You can also click to toggle the data to show a different relationship. As a main goal of our investigation, we want to show how Reddit users who are active in the controversial subreddits interact with the rest of the website. When you click to toggle the dataset, the graph will show which generic subreddits have the highest percentage of commenters who also comment in controversial subreddits. Because we aim to look at the way those who comment in controversial subreddits interact with the rest of the reddit community, for this dataset, we prioritized the size of crossover nodes, as well as the percentage of commenters who also comment in controversial subreddits. For larger subreddits, the threshold of commenters shared with controversial subreddits is lower, because 3% or 6% of a reddit with 6,000,000 commenters, is still notable.</p>
                 </div>
             </div>
             <div class="fluid-container">
                 <section id="force_vis">
+<<<<<<< HEAD
                     <div class="float-left">
                       <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-primary active" id="fdgQuery1" >
@@ -98,6 +87,25 @@
                           Grow Link 
                       </button>
                     </div>
+=======
+                    <button type="button" class="btn btn-outline-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="fishEyeToggle">
+                        Fisheye
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="dataToggle">
+                        Filter Data
+                    <button type="button" class="btn btn-outline-primary" id="increaseRepulsion">
+                        Increase Repulsion
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="decreaseRepulsion">
+                        Decrease Repulsion
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="shrinkLink">
+                        Shrink Link 
+                    </button>
+                    <button type="button" class="btn btn-outline-primary" id="growLink">
+                        Grow Link 
+                    </button>
+>>>>>>> 1ed69b4156bbae52e3952a5e8615d3726f239930
                     <svg width="500" height="500" id="force-graph"></svg>
                      <div id="table"></div>
                 </section>
