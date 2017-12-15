@@ -3,11 +3,25 @@ var dist_factor;
 var dist_exp;
 var charge_str;
 let FISHEYE_ENABLED = false;
+let CHARGE = false;
 
 //FISHEYE TOGGLE CLICK HANDLER
 $("#fishEyeToggle").click(() => {
     FISHEYE_ENABLED = !FISHEYE_ENABLED;
 });
+$("#increaseRepulsion").click(() => {
+    setCharge(graph_simulation, charge_str*1.1);
+});
+$("#decreaseRepulsion").click(() => {
+    setCharge(graph_simulation, charge_str*.9);
+});
+$("#shrinkLink").click(() => {
+    setDistance(graph_simulation, dist_factor * .90, dist_exp);
+});
+$("#growLink").click(() => {
+    setDistance(graph_simulation, dist_factor * 1.10, dist_exp);
+});
+
 
 
 const createForceGraph = function (result) {
@@ -41,20 +55,20 @@ const createForceGraph = function (result) {
         .force("charge", d3.forceManyBody().strength(CHARGE_STRENGTH))
         .force("center", d3.forceCenter(width / 2, height / 2));
 //ARROW MARKERS
-    svg_force_graph.append("defs").selectAll("marker")
-        .data(["suit", "licensing", "resolved"])
-        .enter().append("marker")
-        .attr("id", function(d) { return d; })
-        .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 25)
-        .attr("refY", 0)
-        .attr("markerWidth", 6)
-        .attr("markerHeight", 6)
-        .attr("orient", "auto")
-        .append("path")
-        .attr("d", "M0,-5L10,0L0,5 L10,0 L0, -5")
-        .style("stroke", "#4679BD")
-        .style("opacity", "0.6");
+//    svg_force_graph.append("defs").selectAll("marker")
+//        .data(["suit", "licensing", "resolved"])
+//        .enter().append("marker")
+//        .attr("id", function(d) { return d; })
+//        .attr("viewBox", "0 -5 10 10")
+//        .attr("refX", 25)
+//        .attr("refY", 0)
+//        .attr("markerWidth", 6)
+//        .attr("markerHeight", 6)
+//        .attr("orient", "auto")
+//        .append("path")
+//        .attr("d", "M0,-5L10,0L0,5 L10,0 L0, -5")
+//        .style("stroke", "#4679BD")
+//        .style("opacity", "0.6");
 //FISHEYE
 
     const fisheye = d3.fisheye.circular()
