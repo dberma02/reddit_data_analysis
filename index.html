@@ -34,38 +34,42 @@
       </div>
     </nav>
     <div class="header">
-        <div class="warning">
-        <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
-        </div>
-        <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
-        <h3> Goals: </h3>
-        <ul>
-            <li>Examine controversial communities on reddit</li>
+        <div class="container">
+            <div class="warning">
+            <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
+            </div>
+            <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
+            <h3> Goals: </h3>
             <ul>
-                <li>Specifically look at controversial hate commmunities.</li>
-                <li>See how these groups have changed over time in:</li>
+                <li>Examine controversial communities on reddit</li>
                 <ul>
-                    <li>Active contributors</li>
-                    <li>Upvotes</li>
-                    <li>Influence on non-controversial subreddits</li>
+                    <li>Specifically look at controversial hate commmunities.</li>
+                    <li>See how these groups have changed over time in:</li>
+                    <ul>
+                        <li>Active contributors</li>
+                        <li>Upvotes</li>
+                        <li>Influence on non-controversial subreddits</li>
+                    </ul>
+                </ul>
+                <li>Effects of banning on the impact of controversial communities and hate speech</li>
+                <ul>
+                    <li>Activity on non-controversial subreddits</li>
+                    <li>Has admin intervention stemmed the growth of hate speech</li>
                 </ul>
             </ul>
-            <li>Effects of banning on the impact of controversial communities and hate speech</li>
-            <ul>
-                <li>Activity on non-controversial subreddits</li>
-                <li>Has admin intervention stemmed the growth of hate speech</li>
-            </ul>
-        </ul>
+        </div>
     </div>
         <section id="force_graph_window">
-            <div class="graph_info">
-                <h2>Subreddit Connections</h2>
-                <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
+            <div class="container">
+                <div class="graph_info">
+                    <h2>Subreddit Connections</h2>
+                    <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
+                </div>
+                <section id="force_vis">
+                    <svg width="500" height="500" id="force-graph"></svg>
+                     <div id="table"></div>
+                </section>
             </div>
-            <section id="force_vis">
-                <svg width="500" height="500" id="force-graph"></svg>
-                 <div id="table"></div>
-            </section>
         </section>
         <section id="sankey_diagram_window">
             <div class="graph_info">
