@@ -165,11 +165,12 @@ FROM (
     HAVING
       percent_of_noncontro_shared >= 3 ) )
 HAVING
-  _rank <= 20 AND
+  _rank <= 10 AND
   a_author_count > 5000
 ORDER BY
   _rank ASC`
 
+var fdgQuery = force_query1;
 
 
   var sankey_query = `SELECT author, subreddit, comments_in_subreddit,  total_comments, _rank
@@ -211,10 +212,11 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
 
 
   function runForceQuery() {
+   
    var request = gapi.client.bigquery.jobs.query({
       'projectId': project_id,
       'timeoutMs': '300000',
-      'query': force_query1,
+      'query': fdgQuery,
     });
     request.execute(function(response) {
         console.log(response.rows)
@@ -255,4 +257,32 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
   }
 
 gapi.load('client:auth', authorize);
+
+
+
+
+
+
+$('#fdgQuery2').on("click",function(){ 
+  if(fdgQuery == force_query2) {
+    console.log("query2");
+    return;
+  } else {
+    fdgQuery = force_query2;
+    console.log("query2");
+    d3.select(".graph").selectAll("force-graph").remove();
+    gapi.load('client:auth', authorize);
+    console.log("query2");
+  }
+});
+$('#fdgQuery1').on("click",function(){ 
+  if(fdgQuery == force_query1) {
+    console.log("query1");
+    return;
+  } else {
+    fdgQuery = force_query1;
+    d3.select(".graph").selectAll("force-graph").remove();
+    gapi.load('client:auth', authorize);
+  }
+});
 
