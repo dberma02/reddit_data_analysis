@@ -1,4 +1,7 @@
-
+const targetTotalValue = [];
+const sourceTotalValue = [];
+let originalNodesMap;
+let originalLinks;
 
  function toGraph(data) {
      const nodesMap = [];
@@ -71,19 +74,40 @@ function dictToArray(nodesMap) {
      return output;
  }
 
-function toSankey(data){
+function filterGraph(nodesMap, MIN_TARGET_VALUE, links) {
+    const nodes = dictToSankeyNodes(nodesMap).filter(node => !targetTotalValue[node.id] || targetTotalValue[node.id] >= MIN_TARGET_VALUE).sort((a, b) => sortByTotalValue(a.id, b.id));
+    const fixed_links = links.filter(link => targetTotalValue[link.target] >= MIN_TARGET_VALUE).map(link => ({
+        source: nodes.findIndex(node => node.id === link.source),
+        target: nodes.findIndex(node => node.id === link.target),
+        value: link.value
+    })).filter(link => link.source != -1 && link.target != -1);
+
+    const graph = {
+        nodes: nodes,
+        links: fixed_links
+    };
+    return graph;
+}
+
+function toSankey(data, MIN_TARGET_VALUE){
      const nodesMap = [];
      const numLinks = [];
      const links = new Array();
-     const targetTotalValue = [];
-     const sourceTotalValue = [];
      // console.log(data);
-     const MIN_TARGET_VALUE = 3000;
+     // const MIN_TARGET_VALUE = 2000;
      const MAX_NEIGHBORS = 30;
      for(let i = 0; i < data.length; i++) { // data.length
-         const target = data[i].f[1].v;
-         const source = data[i].f[0].v;
+         let target = data[i].f[1].v;
+         let source = data[i].f[0].v;
          nodesMap[source] = source;
+         if(targetTotalValue[source]) {
+             source += " (user)";
+
+         }
+         if(sourceTotalValue[target]) {
+             target += " (subreddit)";
+         }
+
          if (!numLinks[target]) {
              numLinks[target] = 0;
          }
@@ -107,38 +131,30 @@ function toSankey(data){
          // }
     }
     for (let node in nodesMap) {
-        if (numLinks[node] > 1) {
+        // if (numLinks[node] > 1) {
             nodesMap[node] = node
-        }
+        // }
     }
-     // console.log("links", links);
-     const nodes = dictToSankeyNodes(nodesMap).filter(node => !targetTotalValue[node.id] || targetTotalValue[node.id] >= MIN_TARGET_VALUE).sort((a, b) => sortByTotalValue(a.id, b.id));
-     const fixed_links = links.filter(link => targetTotalValue[link.target] >= MIN_TARGET_VALUE).map(link => ({
-         source: nodes.findIndex(node => node.id === link.source),
-         target: nodes.findIndex(node => node.id === link.target),
-         value: link.value
-     })).filter(link => link.source != -1 && link.target != -1);
-     const graph = {
-         nodes: nodes,
-         links: fixed_links
-     };
+    originalNodesMap = nodesMap;
+     originalLinks = links;
+    const graph = filterGraph(nodesMap, MIN_TARGET_VALUE, links);
      // console.log("nodes", nodes);
      // console.log(sourceTotalValue, targetTotalValue);
 
-    function sortByTotalValue(a, b) {
-        if (targetTotalValue[b] && sourceTotalValue[a]) {
-            return 1;
-        } else if (targetTotalValue[a] && sourceTotalValue[b]) {
-            return -1
-        } else {
+
+    console.log("sankey", graph);
+    return graph;
+
+}
+function sortByTotalValue(a, b) {
+    if (targetTotalValue[b] && sourceTotalValue[a]) {
+        return 1;
+    } else if (targetTotalValue[a] && sourceTotalValue[b]) {
+        return -1
+    } else {
         const a_totalValue = targetTotalValue[a] ? targetTotalValue[a] : sourceTotalValue[a];
         const b_totalValue = targetTotalValue[b] ? targetTotalValue[b] : sourceTotalValue[b];
         return b_totalValue - a_totalValue};
-    }
-
-    // console.log(graph);
-    return graph;
-
 }
 // {
 //   "nodes":[

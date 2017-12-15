@@ -1,5 +1,7 @@
+let sankey_diagram;
+let MIN_VALUE = 2000;
 const createSankeyDiagram = function(results)  {
-    const diagram = toSankey(results);
+    const diagram = toSankey(results, MIN_VALUE);
     console.log(diagram);
 const svg = d3.select("#sankey-diagram"),
     width = window.innerWidth,
@@ -34,7 +36,8 @@ let node = svg.append("g")
     sankey(diagram);
     link = link
         .data(diagram.links)
-        .enter().append("path")
+        .enter()
+        .append("path")
         .attr("d", d3.sankeyLinkHorizontal()
             .source(function (d) {
                 return [d.source.x1 + ((d.source.y1 - d.source.y0) / 2), d.y0];
@@ -82,7 +85,8 @@ let node = svg.append("g")
 
     node = node
         .data(diagram.nodes)
-        .enter().append("g")
+        .enter()
+        .append("g")
         .on('mouseover', highlightNode)
         .on('mouseout', highlightNode);
 
@@ -149,6 +153,37 @@ let node = svg.append("g")
         }
 
     }
+    sankey_diagram = sankey;
+    sankey_diagram.updateNodesWithFilter = function (predicate) {
+        console.log(diagram.nodes.filter(predicate));
+
+        let newDiagram = {nodes: diagram.nodes.filter(predicate), links: diagram.links};
+        console.log(newDiagram);
+        sankey.update(newDiagram);
+        sankey.relayout();
+        node.data(newDiagram.nodes);
+        link.data(newDiagram.links);
+        node.exit().remove();
+        link.exit().remove();
+        node.enter();
+    };
+    sankey_diagram.updateLinksWithFilter = function (predicate) {
+        console.log("updating Links");
+        // link.filter(d => !predicate(d)).transition().duration(750).style("opacity", 0.0).remove();
+        // link.filter(predicate).transition();
+        console.log(diagram.links.filter(predicate));
+        let newDiagram = {links: diagram.links.filter(predicate), nodes: diagram.nodes};
+        console.log(newDiagram);
+        sankey.update(newDiagram);
+        sankey.relayout();
+        node.data(newDiagram.nodes);
+        link.data(newDiagram.links);
+        link.exit().remove();
+        node.exit().remove();
+        link.enter();
+    };
+    return sankey_diagram;
 
 
 };
+

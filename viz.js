@@ -318,6 +318,8 @@ $(document).keypress(function(e) {
         case 107:
             setDistance(graph_simulation, dist_factor * .90, dist_exp);
             break;
+        default:
+            updateMinTargetValue(6000);
     }
 });
 
@@ -355,12 +357,20 @@ function testSankey(numNodes, numLinks, maxValue) {
 
 
 
-// $.getJSON("sankey_test.json", result => {
-//     console.log(result.rows);
-//     return createSankeyDiagram(result.rows);
-// });
+$.getJSON("sankey_test.json", result => {
+    console.log(result.rows);
+    return createSankeyDiagram(result.rows);
+});
+
+function updateMinTargetValue(newMinTargetValue) {
+    MIN_VALUE = newMinTargetValue;
+    gapi.load('client:auth', authorize);
+    // sankey_diagram.updateLinksWithFilter(link => link.target.value > newMinTargetValue);
+    // sankey_diagram.updateNodesWithFilter(node => node.depth !=1 || node.value > newMinTargetValue);
+}
+
 // testSankey(20, 20, 100);
-// $.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
+$.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
 // $.getJSON("forceDirectedGraphNewQuery.json", result => graph_simulation = createForceGraph(result.rows));
 
 
