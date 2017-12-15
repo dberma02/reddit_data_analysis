@@ -166,7 +166,7 @@ const createForceGraph = function (result) {
                 </tr>`;
         for (i=0; i < data.length; i++) {
             if (data[i].source == d.id) {
-                console.log(data[i].source + "  "+ d.id);
+                console.log("Source" + data[i].source + "  "+ data[i].target);
                 neighbors += 
                 '<tr>'+
                 '<th>'+data[i].source+'</th>' +
@@ -179,7 +179,7 @@ const createForceGraph = function (result) {
                 
             }
             else if (data[i].target == d.id) {
-                console.log(data[i].target + "  "+ d.id);
+                console.log("Target" +data[i].target + "  "+ d.id);
                 neighbors += 
                 '<tr>'+
                 '<th>'+data[i].source+'</th>' +
@@ -204,8 +204,6 @@ const createForceGraph = function (result) {
         if (toggle == 0) {
             //Reduce the opacity of all but the neighbouring nodes
             d = d3.select(this).node().__data__;
-            console.log(d);
-
             node.style("opacity", function (o) {
                 return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
             });
