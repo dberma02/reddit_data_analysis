@@ -220,6 +220,8 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
     });
     request.execute(function(response) {
         console.log(response.rows)
+        d3.select("#force-graph").selectAll('*').remove();
+        // d3.select("#force-graph").remove();
         createForceGraph(response.rows);
     });
   }
@@ -269,10 +271,7 @@ $('#fdgQuery2').on("click",function(){
     return;
   } else {
     fdgQuery = force_query2;
-    console.log("query2");
-    d3.select(".graph").selectAll("force-graph").remove();
     gapi.load('client:auth', authorize);
-    console.log("query2");
   }
 });
 $('#fdgQuery1').on("click",function(){ 
@@ -281,7 +280,6 @@ $('#fdgQuery1').on("click",function(){
     return;
   } else {
     fdgQuery = force_query1;
-    d3.select(".graph").selectAll("force-graph").remove();
     gapi.load('client:auth', authorize);
   }
 });
