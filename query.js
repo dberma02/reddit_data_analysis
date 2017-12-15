@@ -34,7 +34,7 @@ FROM (
       FIRST(b.author_count) b_author_count,
       FIRST(a.author_count) a_author_count,
       count(*) shared_author_count,
-      COUNT(*) OVER(PARTITION BY sub_b) sub_bc,
+      COUNT(*) OVER(PARTITION BY sub_b) sub_bc
     FROM (
       SELECT
         author,
@@ -86,12 +86,13 @@ HAVING
 ORDER BY
   2,
   3 DESC`;
-  var sankey_query = `SELECT author, subreddit, comments_in_subreddit,  total_comments_in_controversial, _rank
+
+  var sankey_query = `SELECT author, subreddit, comments_in_subreddit,  total_comments, _rank
 FROM(
-SELECT author, subreddit, comments_in_subreddit,  total_comments_in_controversial, 
-       RANK() OVER(ORDER BY total_comments_in_controversial DESC) _rank
+SELECT author, subreddit, comments_in_subreddit,  total_comments, 
+       DENSE_RANK() OVER(ORDER BY total_comments DESC) _rank
 FROM(
-  (SELECT author, subreddit, comments_in_subreddit, total_comments total_comments_in_controversial
+  (SELECT author, subreddit, comments_in_subreddit, total_comments
    FROM
      (SELECT author, subreddit, COUNT(*) OVER(PARTITION BY subreddit, author) comments_in_subreddit, 
               COUNT(*) OVER(PARTITION BY author) total_comments
@@ -105,24 +106,22 @@ FROM(
               (SELECT author, subreddit, COUNT(*) OVER(PARTITION BY author) total_comments
            
                 FROM [fh-bigquery:reddit_comments.all]
-                WHERE 
-		  subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 
-				'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 
-				'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers',
-				'DarkNetMarkets', 'european', 'altright','MetaCanada','UncensoredNews',
-				'Imgoingtohellforthis', 'CringeAnarchy','DankMemes','KotakuInAction', 'TumblrInAction',
-				'PussyPass', 'PussyPassDenied','MGTOW','far_right', 'Nazi',
-				'racoonsareniggers', 'DylannRoofInnocent', 'ReallyWackyTicTacs', 'whitesarecriminals',
-				'Polacks', 'SexWithDogs', 'SexWithHorses', 'bestiality', 'picsofcaninevaginas',
-				'zoogold', 'picsofdeadkids', 'picsofcaninedicks', 'tailbait', 'horsecock', 'horsevagina',
-				'killthejews', 'killthejews', 'selfharmpics','EuropeanNationalism', 'pol')
-                AND author NOT IN (SELECT author FROM [fh-bigquery:reddit_comments.bots_201505])
+                WHERE subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 
+                                    'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 
+                                     'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers',
+                                     'DarkNetMarkets', 'european', 'altright','MetaCanada','UncensoredNews',
+                                     'Imgoingtohellforthis', 'CringeAnarchy','DankMemes','KotakuInAction', 'TumblrInAction',
+                                     'PussyPass', 'PussyPassDenied','MGTOW','far_right', 'Nazi',
+                                     'racoonsareniggers', 'DylannRoofInnocent', 'ReallyWackyTicTacs', 'whitesarecriminals',
+                                     'Polacks', 'SexWithDogs', 'SexWithHorses', 'bestiality', 'picsofcaninevaginas',
+                                     'zoogold', 'picsofdeadkids', 'picsofcaninedicks', 'tailbait', 'horsecock', 'horsevagina',
+                                     'killthejews', 'killthejews', 'selfharmpics','EuropeanNationalism', 'pol')                AND author NOT IN (SELECT author FROM [fh-bigquery:reddit_comments.bots_201505])
                 AND author != "[deleted]"
                 AND NOT LOWER(author) CONTAINS "bot"))
           WHERE total_comments > 12000)))
-  GROUP BY author, subreddit, comments_in_subreddit, total_comments_in_controversial)))
+  GROUP BY author, subreddit, comments_in_subreddit, total_comments)))
 WHERE _rank <= 30
-ORDER BY total_comments_in_controversial DESC, comments_in_subreddit DESC`;
+ORDER BY total_comments DESC, comments_in_subreddit DESC`;
 
 
 
