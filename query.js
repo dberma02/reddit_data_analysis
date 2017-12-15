@@ -233,6 +233,7 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
       'query': sankey_query,
     });
     request.execute(function(response) {
+              d3.select("#sankey-diagram").selectAll('*').remove();
         createSankeyDiagram(response.rows);
     });
   }
