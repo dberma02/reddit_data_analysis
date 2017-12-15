@@ -164,7 +164,7 @@ const createForceGraph = function (result) {
                     <th>Target Size</th> 
                 </tr>`;
         for (i=0; i < data.length; i++) {
-            if (data[i].source = d.id) {
+            if (data[i].source == d.id) {
                 console.log(data[i].source + "  "+ d.id);
                 neighbors += 
                 '<tr>'+
