@@ -78,7 +78,7 @@ function toSankey(data){
      const targetTotalValue = [];
      const sourceTotalValue = [];
      // console.log(data);
-     const MIN_TARGET_VALUE = 1000;
+     const MIN_TARGET_VALUE = 3000;
      const MAX_NEIGHBORS = 30;
      for(let i = 0; i < data.length; i++) { // data.length
          const target = data[i].f[1].v;
