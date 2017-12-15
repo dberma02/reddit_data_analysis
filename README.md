@@ -8,6 +8,9 @@ Shreenath Bhanderi worked on transforming the data into something workable for v
 Daniel Navon focused on building out the visualizations. 
 
 Video:
+https://www.youtube.com/watch?v=wUgAgcJmn8s
 
 We obtained the dataset from a public dump of all reddit data hosted on Google BigQuery at:
 https://bigquery.cloud.google.com/table/fh-bigquery:reddit_comments.2015_05
+
+
