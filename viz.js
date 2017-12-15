@@ -154,8 +154,9 @@ const createForceGraph = function (result) {
         d = d3.select(this).node().__data__;
         console.log(d);
 
-        var neighbors = d.id + `</br> 
-            <table style='width:100%'> 
+        var neighbors = "<h5>" + d.id + "</h5>"+ `
+            <table class='table table-hover sm-table'> 
+                <thead class='thead-light'>
                 <tr> 
                     <th>Source</th> 
                     <th>Target</th> 
@@ -163,7 +164,9 @@ const createForceGraph = function (result) {
                     <th>%Noncontroversial Commented</th> 
                     <th>Source Size</th> 
                     <th>Target Size</th> 
-                </tr>`;
+                </tr>
+                </thead>
+                <tbody>`;
         for (i=0; i < data.length; i++) {
             if (data[i].source == d.id) {
                 console.log("Source" + data[i].source + "  "+ data[i].target);
@@ -191,13 +194,13 @@ const createForceGraph = function (result) {
                 '</tr>'  
             }
         }
-        neighbors += "</table>";
-        document.getElementById('percentages').innerHTML = neighbors;
+        neighbors += "</tbody></table>";
+        document.getElementById('table').innerHTML = neighbors;
         togData = 1;
     }
     else {
         togData = 0;
-        document.getElementById('percentages').innerHTML = '';
+        document.getElementById('table').innerHTML = '';
     }
     }
     function connectedNodes() {
