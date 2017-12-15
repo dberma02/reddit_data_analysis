@@ -21,69 +21,74 @@
 
     </head>
 
-    <body>
+    <body data-spy="scroll" data-target="#mainNav" data-offset="0">
      <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Reddit Data Analysis</a>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#force_graph">Subreddit Connections</a>
+              <a class="nav-link js-scroll-trigger" href="#force_graph_window">Subreddit Connections</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#sankey_diagram">Commenter Relationships</a>
+              <a class="nav-link js-scroll-trigger" href="#sankey_diagram_window">Commenter Relationships</a>
             </li>
           </ul>
       </div>
     </nav>
-    <div class="header">
-        <div class="container">
-            <div class="warning">
-            <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
-            </div>
-            <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
-            <h3> Goals: </h3>
-            <ul>
-                <li>Examine controversial communities on reddit</li>
+        <div class="header">
+            <div class="container">
+                <div class="warning">
+                    <h4> WARNING: The following site contains sexist, racist, transphobic, and homophobic slurs. </h4>
+                </div>
+                <p>These subreddits are considered controversial hate communities: <a href="https://en.wikipedia.org/wiki/Controversial_Reddit_communities">(based on list found here on wikipedia)</a>: 'fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers', 'DarkNetMarkets', 'european'</p>
+                <h3> Goals: </h3>
                 <ul>
-                    <li>Specifically look at controversial hate commmunities.</li>
-                    <li>See how these groups have changed over time in:</li>
+                    <li>Examine controversial communities on reddit</li>
                     <ul>
-                        <li>Active contributors</li>
-                        <li>Upvotes</li>
-                        <li>Influence on non-controversial subreddits</li>
+                        <li>Specifically look at controversial hate commmunities.</li>
+                        <li>See how these groups have changed over time in:</li>
+                        <ul>
+                            <li>Active contributors</li>
+                            <li>Upvotes</li>
+                            <li>Influence on non-controversial subreddits</li>
+                        </ul>
+                    </ul>
+                    <li>Effects of banning on the impact of controversial communities and hate speech</li>
+                    <ul>
+                        <li>Activity on non-controversial subreddits</li>
+                        <li>Has admin intervention stemmed the growth of hate speech</li>
                     </ul>
                 </ul>
-                <li>Effects of banning on the impact of controversial communities and hate speech</li>
-                <ul>
-                    <li>Activity on non-controversial subreddits</li>
-                    <li>Has admin intervention stemmed the growth of hate speech</li>
-                </ul>
-            </ul>
+            </div>
         </div>
-    </div>
+
         <section id="force_graph_window">
             <div class="container">
                 <div class="graph_info">
-                    <h2>Subreddit Connections</h2>
+                    <h2 id="force_info">Subreddit Connections</h2>
                     <p>This graph takes an in-depth look at the list of controversial subreddits and the other communities which the have the most influence in. From this graph, we can see that these communities are not isolated and over 10% of the comments in major subreddits such as r/politics and r/news come from specific controversial communities. In this graph, a connection is shown if 10% of commenters of a non-controversial subreddit (such as r/AdviceAnimals) are found to also have commented in a controversial subreddit. </p>
                 </div>
             </div>
-        <div class="fluid-container">
-            <section id="force_vis">
-                <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="fishEyeToggle">
-                    Fisheye
-                </button>
-                <svg width="500" height="500" id="force-graph"></svg>
-                 <div id="table"></div>
-            </section>
-             </div>
+            <div class="fluid-container">
+                <section id="force_vis">
+                    <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" id="fishEyeToggle">
+                        Fisheye
+                    </button>
+                    <svg width="500" height="500" id="force-graph"></svg>
+                     <div id="table"></div>
+                </section>
+            </div>
         </section>
         <section id="sankey_diagram_window">
-            <div class="graph_info">
-                <h2>Commenter Relationships</h2>
-                <p>In this sankey diagram, we took a look at the most prolific commenters who have commented on a controversial subreddit and looked to see what other subreddits they have commented in.</p>
+            <div class="container">
+                <div class="graph_info">
+                    <h2>Commenter Relationships</h2>
+                    <p>In this sankey diagram, we took a look at the most prolific commenters who have commented on a controversial subreddit and looked to see what other subreddits they have commented in.</p>
+                </div>
             </div>
-            <svg width="1200" height="800" id="sankey-diagram"></svg>
+            <div class="fluid-container">
+                <svg width="1200" height="800" id="sankey-diagram"></svg>
+            </div>
         </section>
     <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="d3-sankey.js"></script>

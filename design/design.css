@@ -5,7 +5,7 @@ p {
   font-size: 16px; }
 
 p.small {
-  font-size: 8px; }
+  font-size: 12px; }
 
 a,
 a.active,
@@ -31,7 +31,7 @@ section {
 .warning{
   padding-left: 200px;
   padding-right:200px;
-  padding-top: 100px;
+  padding-top: 200px;
   padding-bottom:600px;
 
 }
@@ -44,13 +44,10 @@ section {
   #graph_info {
   padding-left:50px;
   padding-right:50px;
-  float:top;
   }
   #force_vis {
   }
-    #percentages{
-    }
-    #force-graph {
+  #force-graph {
     }
   
 #sankey_diagram_window {
