@@ -1,5 +1,5 @@
-const targetTotalValue = [];
-const sourceTotalValue = [];
+let targetTotalValue = [];
+let sourceTotalValue = [];
 let originalNodesMap;
 let originalLinks;
 
