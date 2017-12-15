@@ -2,7 +2,7 @@
   var project_id = 'summer-topic-186219';
   var clientId = '364884337709-tfnpb2hpdjojtthmer10glfjf1oqmgft.apps.googleusercontent.com';
   var scopes = 'https://www.googleapis.com/auth/bigquery';
-  var force_query = `SELECT
+  var force_query1 = `SELECT
   sub_a,
   sub_b,
   percent_of_contro_shared,
@@ -87,6 +87,91 @@ ORDER BY
   2,
   3 DESC`;
 
+  var force_query2 = `SELECT
+  sub_a,
+  sub_b,
+  percent_of_contro_shared,
+  percent_of_noncontro_shared,
+  a_author_count,
+  b_author_count,
+  sub_ac,
+  sub_bc,
+  _rank
+FROM (
+  SELECT
+    sub_a,
+    sub_b,
+    percent_of_contro_shared,
+    percent_of_noncontro_shared,
+    b_author_count,
+    a_author_count,
+    COUNT(*) OVER(PARTITION BY sub_a) sub_ac,
+    sub_bc,
+    RANK() OVER(PARTITION BY sub_B ORDER BY a_author_count DESC) _rank
+  FROM (
+    SELECT
+      a.subreddit sub_a,
+      b.subreddit sub_b,
+      INTEGER(100*COUNT(*) / FIRST(b.author_count) ) percent_of_contro_shared,
+      INTEGER(100*COUNT(*) / FIRST(a.author_count) ) percent_of_noncontro_shared,
+      FIRST(b.author_count) b_author_count,
+      FIRST(a.author_count) a_author_count,
+      count(*) shared_author_count,
+      COUNT(*) OVER(PARTITION BY sub_b) sub_bc,
+    FROM (
+      SELECT
+        author,
+        subreddit, author_count
+      FROM
+        FLATTEN((
+          SELECT
+            UNIQUE(author) author, 
+            subreddit, COUNT(DISTINCT author) author_count
+          FROM
+            [fh-bigquery:reddit_comments.all]
+          GROUP EACH BY
+            2 ),author)) a
+    JOIN EACH (
+      SELECT
+        author,
+        subreddit, author_count
+      FROM
+        FLATTEN((
+          SELECT
+            UNIQUE(author) author,
+            subreddit, COUNT(DISTINCT author) author_count
+          FROM
+            [fh-bigquery:reddit_comments.all]
+          WHERE
+            subreddit IN ('fatpeoplehate', 'incels', 'pizzagate', 'niggers', 'Coontown', 'hamplanethatred', 
+                          'transfags', 'neofag','shitniggerssay', 'The_Donald', 'TheFappening', 'beatingwomen', 
+                          'Creepshots', 'jailbait', 'Physical_Removal', 'MensRights', 'findbostonbombers',
+                          'DarkNetMarkets', 'european', 'altright','MetaCanada','UncensoredNews',
+                          'Imgoingtohellforthis', 'CringeAnarchy','DankMemes','KotakuInAction', 'TumblrInAction',
+                          'PussyPass', 'PussyPassDenied','MGTOW','far_right', 'Nazi',
+                          'racoonsareniggers', 'DylannRoofInnocent', 'ReallyWackyTicTacs', 'whitesarecriminals',
+                          'Polacks', 'SexWithDogs', 'SexWithHorses', 'bestiality', 'picsofcaninevaginas',
+                          'zoogold', 'picsofdeadkids', 'picsofcaninedicks', 'tailbait', 'horsecock', 'horsevagina',
+                          'killthejews', 'killthejews', 'selfharmpics','EuropeanNationalism', 'pol')
+          GROUP BY
+            2 ),author) ) b
+    ON
+      a.author=b.author
+    WHERE
+      a.subreddit!=b.subreddit
+    GROUP EACH BY
+      1,
+      2
+    HAVING
+      percent_of_noncontro_shared >= 3 ) )
+HAVING
+  _rank <= 20 AND
+  a_author_count > 5000
+ORDER BY
+  _rank ASC`
+
+
+
   var sankey_query = `SELECT author, subreddit, comments_in_subreddit,  total_comments, _rank
 FROM(
 SELECT author, subreddit, comments_in_subreddit,  total_comments, 
@@ -129,7 +214,7 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
    var request = gapi.client.bigquery.jobs.query({
       'projectId': project_id,
       'timeoutMs': '300000',
-      'query': force_query,
+      'query': force_query1,
     });
     request.execute(function(response) {
         console.log(response.rows)
