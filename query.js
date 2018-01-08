@@ -212,30 +212,48 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
 
 
   function runForceQuery() {
-   
-   var request = gapi.client.bigquery.jobs.query({
-      'projectId': project_id,
-      'timeoutMs': '300000',
-      'query': fdgQuery,
-    });
-    request.execute(function(response) {
-        console.log(response.rows)
-        d3.select("#force-graph").selectAll('*').remove();
-        createForceGraph(response.rows);
-    });
+console.log("fquery");   
+//   var request = gapi.client.bigquery.jobs.query({
+//      'projectId': project_id,
+//      'timeoutMs': '300000',
+//      'query': fdgQuery,
+//    });
+//    request.execute(function(response) {
+//        console.log("forceDirected", response.rows);
+//        d3.select("#force-graph").selectAll('*').remove();
+//        createForceGraph(response.rows);
+//    });
+
+    d3.select("#force-graph").selectAll('*').remove();
+    if(fdgQuery == force_query2) {
+      // create with FORCE_QUERY_2
+      //    $.getJSON("sample_fdg_response2.json", result => graph_simulation = createForceGraph(result.rows));
+      $.getJSON("sample_fdg_response2.json", result => graph_simulation = createForceGraph(result.rows));
+    } else {
+      // create with FORCE_QUERY_1
+      $.getJSON("sample_fdg_response1.json", result => graph_simulation = createForceGraph(result.rows));
+    }
+
+     
   }
 
   function runSankeyQuery() {
-   var request = gapi.client.bigquery.jobs.query({
-      'projectId': project_id,
-      'timeoutMs': '300000',
-      'query': sankey_query,
-    });
-    request.execute(function(response) {
-        targetTotalValue = [];
-        sourceTotalValue = [];
-        d3.select("#sankey-diagram").selectAll('*').remove();
-        createSankeyDiagram(response.rows);
+//   var request = gapi.client.bigquery.jobs.query({
+//      'projectId': project_id,
+//      'timeoutMs': '300000',
+//      'query': sankey_query,
+//    });
+//    request.execute(function(response) {
+//        targetTotalValue = [];
+//        sourceTotalValue = [];
+//        d3.select("#sankey-diagram").selectAll('*').remove();
+//        createSankeyDiagram(response.rows);
+//    });
+
+    d3.select("#sankey-diagram").selectAll('*').remove();
+    $.getJSON("sample_sankey_response.json", result => {
+      console.log(result.rows);
+      return createSankeyDiagram(result.rows);
     });
   }
 
@@ -260,8 +278,9 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
     );
   }
 
-gapi.load('client:auth', authorize);
-
+//gapi.load('client:auth', authorize);
+runForceQuery();
+runSankeyQuery();
 
 
 
@@ -269,20 +288,21 @@ gapi.load('client:auth', authorize);
 
 $('#fdgQuery2').on("click",function(){ 
   if(fdgQuery == force_query2) {
-    console.log("query2");
-    return;
+    console.log("already query2");
   } else {
     fdgQuery = force_query2;
-    gapi.load('client:auth', authorize);
+//    gapi.load('client:auth', authorize);
+    runForceQuery();
   }
 });
 $('#fdgQuery1').on("click",function(){ 
   if(fdgQuery == force_query1) {
-    console.log("query1");
+    console.log("already query1");
     return;
   } else {
     fdgQuery = force_query1;
-    gapi.load('client:auth', authorize);
+//    gapi.load('client:auth', authorize);
+    runForceQuery();
   }
 });
 

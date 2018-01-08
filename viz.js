@@ -383,6 +383,7 @@ function updateMinTargetValue(newMinTargetValue) {
     // sankey_diagram.updateNodesWithFilter(node => node.depth !=1 || node.value > newMinTargetValue);
 }
 
+    $.getJSON("sample_fdg_response2.json", result => graph_simulation = createForceGraph(result.rows));
 // testSankey(20, 20, 100);
 // $.getJSON("results-20171211-234134.json", result => graph_simulation = createForceGraph(result.rows));
 // $.getJSON("forceDirectedGraphNewQuery.json", result => graph_simulation = createForceGraph(result.rows));

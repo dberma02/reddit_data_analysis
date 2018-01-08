@@ -45,7 +45,7 @@ let originalLinks;
      // console.log("links", links);
      const nodes = dictToArray(nodesMap);
      const graph = {nodes, links, dataConnects};
-    // console.log(graph);
+    console.log("force directed", graph);
     return graph;
 }
 
