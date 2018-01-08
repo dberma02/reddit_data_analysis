@@ -221,7 +221,6 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
     request.execute(function(response) {
         console.log(response.rows)
         d3.select("#force-graph").selectAll('*').remove();
-        // d3.select("#force-graph").remove();
         createForceGraph(response.rows);
     });
   }
@@ -235,7 +234,7 @@ ORDER BY total_comments DESC, comments_in_subreddit DESC`;
     request.execute(function(response) {
         targetTotalValue = [];
         sourceTotalValue = [];
-              d3.select("#sankey-diagram").selectAll('*').remove();
+        d3.select("#sankey-diagram").selectAll('*').remove();
         createSankeyDiagram(response.rows);
     });
   }
