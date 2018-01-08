@@ -257,26 +257,26 @@ console.log("fquery");
     });
   }
 
-  function authorize(event) {
-    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
-    return false;
-  }
-  function handleAuthResult(authResult) {
-    if (authResult && !authResult.error) {
-      loadApi();
-    } else {
-      console.error('Not authorized.')
-    }
-  }
-
-  function loadApi(){
-    gapi.client.load('bigquery', 'v2').then(
-      function() {
-        runForceQuery();
-        runSankeyQuery();
-      }
-    );
-  }
+//  function authorize(event) {
+//    gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, handleAuthResult);
+//    return false;
+//  }
+//  function handleAuthResult(authResult) {
+//    if (authResult && !authResult.error) {
+//      loadApi();
+//    } else {
+//      console.error('Not authorized.')
+//    }
+//  }
+//
+//  function loadApi(){
+//    gapi.client.load('bigquery', 'v2').then(
+//      function() {
+//        runForceQuery();
+//        runSankeyQuery();
+//      }
+//    );
+//  }
 
 //gapi.load('client:auth', authorize);
 runForceQuery();
