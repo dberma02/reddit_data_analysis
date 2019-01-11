@@ -170,6 +170,12 @@ HAVING
 ORDER BY
   _rank ASC`
 
+//force_query2:
+//
+//  For each controversial subreddit, select top 10 largest generic subreddits where:
+//        - At least 3% of all unique commenters also comment in controversial subreddits
+//        - The generic subreddit has at least 5000 unique commenters
+
 var fdgQuery = force_query1;
 
 
@@ -227,7 +233,6 @@ console.log("fquery");
     d3.select("#force-graph").selectAll('*').remove();
     if(fdgQuery == force_query2) {
       // create with FORCE_QUERY_2
-      //    $.getJSON("sample_fdg_response2.json", result => graph_simulation = createForceGraph(result.rows));
       $.getJSON("sample_fdg_response2.json", result => graph_simulation = createForceGraph(result.rows));
     } else {
       // create with FORCE_QUERY_1
@@ -279,7 +284,7 @@ console.log("fquery");
 //  }
 
 //gapi.load('client:auth', authorize);
-runForceQuery();
+//runForceQuery();
 runSankeyQuery();
 
 

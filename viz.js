@@ -308,7 +308,6 @@ simulation.force("link").distance(function (d) {
     });
     simulation.restart();
     simulation.alpha(1);
-
 }
 
 $(document).keypress(function(e) {
